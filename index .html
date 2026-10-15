@@ -1,0 +1,706 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Tienda Bryemky</title><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap"><style id="estilos">
+/* Layout: una columna estrecha tipo app, catálogo en filas de "ficha de equipación", barra de pedido fija abajo */
+:root{
+  --bg:#f3f3f1;--surface:#ffffff;--ink:#0b0b0c;--muted:#5f6166;--line:#dedfe0;
+  --accent:#0b0b0c;--accent-ink:#ffffff;--price:#ffffff;--price-bg:#0b0b0c;--gold:#d8b25a;
+  --ok:#0f7a55;--ok-bg:#dcf3e9;--warn:#9a5b00;--warn-bg:#fdf0d6;--off:#6b7489;--off-bg:#e7eaf1;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:10px;
+  --grass1:#2f8f3a;--grass2:#2a8434;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d0d0e;--surface:#17181a;--ink:#f2f2f0;--muted:#a3a5aa;--line:#2b2d31;
+  --accent:#000000;--accent-ink:#ffffff;--price:#ffffff;--price-bg:#000000;--gold:#e2c06e;
+  --ok:#4fd3a0;--ok-bg:#12352a;--warn:#f2b45a;--warn-bg:#3a2a10;--off:#98a3ba;--off-bg:#1f283a;--grass1:#1f6a2a;--grass2:#1b6025;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d0d0e;--surface:#17181a;--ink:#f2f2f0;--muted:#a3a5aa;--line:#2b2d31;
+  --accent:#000000;--accent-ink:#ffffff;--price:#ffffff;--price-bg:#000000;--gold:#e2c06e;
+  --ok:#4fd3a0;--ok-bg:#12352a;--warn:#f2b45a;--warn-bg:#3a2a10;--off:#98a3ba;--off-bg:#1f283a;--grass1:#1f6a2a;--grass2:#1b6025;color-scheme:dark}
+.cesped-on{background-color:var(--grass1);background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%3E%3Cg%20opacity%3D%22.13%22%3E%3Cg%20transform%3D%22translate%2840%2046%29%22%3E%3Ccircle%20r%3D%2216%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22/%3E%3Cpolygon%20points%3D%220%2C-6.7%206.4%2C-2.1%204.0%2C5.4%20-4.0%2C5.4%20-6.4%2C-2.1%22%20fill%3D%22%23fff%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28190%2070%29%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%3E%3Ccircle%20r%3D%2216%22/%3E%3Cpath%20d%3D%22M-16%200H16M0%20-16V16M-11.2%20-11.2Q0%200%20-11.2%2011.2M11.2%20-11.2Q0%200%2011.2%2011.2%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2896%20150%29%20rotate%28-12%29%22%3E%3Cpath%20d%3D%22M0%200V48%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22/%3E%3Crect%20x%3D%220.0%22%20y%3D%220.0%22%20width%3D%227.5%22%20height%3D%227.5%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%220.0%22%20y%3D%2215.0%22%20width%3D%227.5%22%20height%3D%227.5%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%227.5%22%20y%3D%227.5%22%20width%3D%227.5%22%20height%3D%227.5%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%2215.0%22%20y%3D%220.0%22%20width%3D%227.5%22%20height%3D%227.5%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%2215.0%22%20y%3D%2215.0%22%20width%3D%227.5%22%20height%3D%227.5%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%2222.5%22%20y%3D%227.5%22%20width%3D%227.5%22%20height%3D%227.5%22%20fill%3D%22%23fff%22/%3E%3Crect%20width%3D%2230%22%20height%3D%2222.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28170%20190%29%20scale%281%29%22%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M0%2014h8l6-6h14l4-4h10l2%204h10v4l8%202v4H0z%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2220%22%20r%3D%225%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2220%22%20r%3D%225%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28230%20230%29%22%3E%3Ccircle%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22/%3E%3Cpolygon%20points%3D%220%2C-4.2%204.0%2C-1.3%202.5%2C3.4%20-2.5%2C3.4%20-4.0%2C-1.3%22%20fill%3D%22%23fff%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2830%20220%29%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%3E%3Ccircle%20r%3D%2211%22/%3E%3Cpath%20d%3D%22M-11%200H11M0%20-11V11M-7.7%20-7.7Q0%200%20-7.7%207.7M7.7%20-7.7Q0%200%207.7%207.7%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),repeating-linear-gradient(180deg,var(--grass1) 0 70px,var(--grass2) 70px 140px)}
+.cesped-on .marca,.cesped-on .grupo>h2{color:#fff}
+.cesped-on .hero h1{color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.cesped-on .hero h1 span{color:#ffe14d}
+.cesped-on .hero p{color:#eef8ee}
+.cesped-on .info{background:var(--surface);border-style:solid}
+.cesped-on .barra{background:linear-gradient(transparent,rgba(0,40,10,.45) 40%)}
+.cesped-on .seg{border-color:transparent}
+.escena{width:100%;height:auto;display:block;max-width:520px}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+*{box-sizing:border-box}
+#app{max-width:680px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 120px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+h1,h2,h3{margin:0;text-wrap:balance}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:6px 4px}
+.marca{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.hero{padding-block:22px 18px;display:grid;gap:10px}
+.hero h1{font-family:var(--f-display);font-weight:800;font-size:clamp(44px,13vw,76px);line-height:.88;text-transform:uppercase;letter-spacing:-.01em}
+.hero h1 span{color:var(--accent)}
+.hero p{margin:0;color:var(--muted);max-width:46ch}
+.aviso{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;background:var(--warn-bg);color:var(--warn);padding:6px 12px;border-radius:999px;width:fit-content}
+.grupo{display:grid;gap:8px;margin-top:22px}
+.grupo>h2{font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-bottom:2px}
+.prod{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 12px 12px 14px}
+.prod-txt{min-width:0}
+.prod h3{font-size:16px;font-weight:700;line-height:1.25}
+.prod p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.precio{font-family:var(--f-display);font-weight:800;font-style:italic;font-size:22px;color:var(--price);background:var(--price-bg);padding:1px 9px;border-radius:7px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.btn{border:1px solid var(--line);background:var(--surface);padding:9px 14px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-add{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn-pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);padding:14px 18px;width:100%;font-size:16px;border-radius:12px}
+.btn-wa{background:#1fa855;border-color:#1fa855;color:#fff}
+.btn-sm{padding:6px 11px;font-size:13px}
+.btn-peligro{color:var(--price);border-color:var(--price-bg)}
+.btn:disabled{opacity:.5;cursor:default}
+.info{margin-top:28px;padding:16px;border-radius:var(--r);border:1px dashed var(--line);color:var(--muted);font-size:14px;display:grid;gap:4px}
+.info b{color:var(--ink)}
+.barra{position:fixed;left:0;right:0;bottom:0;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(transparent,var(--bg) 30%);z-index:5}
+.barra .btn-pri{max-width:648px;margin:0 auto;display:flex;justify-content:space-between}
+.velo{position:fixed;inset:0;background:rgba(5,10,20,.5);z-index:10}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:11;background:var(--surface);border-radius:18px 18px 0 0;max-height:92%;overflow-y:auto;padding:18px max(18px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));display:grid;gap:12px;max-width:680px;margin:0 auto}
+.sheet header{display:flex;align-items:center;gap:10px}
+.sheet header h2{font-size:20px;flex:1;min-width:0}
+.x{border:0;background:var(--off-bg);width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer;line-height:1}
+label,.lbl{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+.campo{display:grid;gap:5px}
+input[type=text],input[type=number],textarea,select{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:10px 12px;font-size:15px}
+textarea{min-height:70px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{min-width:46px;padding:8px 10px;border:1px solid var(--line);background:var(--bg);border-radius:8px;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tog{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ink);font-weight:600;padding:10px 12px;border:1px solid var(--line);border-radius:9px;cursor:pointer}
+.tog input{width:20px;height:20px;accent-color:var(--accent)}
+.tog small{color:var(--muted);font-weight:500;margin-left:auto}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:20px;cursor:pointer}
+.stepper output{font-weight:800;font-size:18px;min-width:24px;text-align:center;font-variant-numeric:tabular-nums}
+.err{color:var(--price);font-weight:600;font-size:14px;margin:0}
+.ok{color:var(--ok);font-weight:600;font-size:14px;margin:0}
+.volver{border:0;background:none;color:var(--ink);font-weight:700;cursor:pointer;padding:10px 0}
+.titulo{font-family:var(--f-display);font-weight:800;font-size:34px;text-transform:uppercase;line-height:1}
+.lineas{display:grid;gap:8px;margin-block:14px}
+.linea{display:grid;grid-template-columns:1fr auto;gap:4px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.linea b{font-size:15px}
+.linea .det{color:var(--muted);font-size:13px;grid-column:1}
+.linea .imp{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+.linea .quitar{grid-column:2;justify-self:end;border:0;background:none;color:var(--price);font-weight:600;font-size:13px;cursor:pointer;padding:0}
+.total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 2px;border-top:2px solid var(--ink);margin-top:4px}
+.total span{font-weight:700}
+.total strong{font-family:var(--f-display);font-size:32px;font-weight:800;font-variant-numeric:tabular-nums}
+.form{display:grid;gap:12px;margin-top:8px}
+.caja{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:10px}
+.codigo{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-weight:700;letter-spacing:.04em}
+pre.msg{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:12px;font-size:13px;margin:0;max-height:220px;overflow:auto}
+/* gestión */
+.tabs{display:flex;gap:6px;margin-block:16px 10px;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:none;padding:10px 4px;margin-right:14px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.resumen{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px}
+.stat small{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.stat b{font-family:var(--f-display);font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.filtros{display:flex;gap:6px;overflow-x:auto;padding-block:12px 4px}
+.filtros button{flex:none;border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.filtros button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ped{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:8px}
+.ped-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ped-h .fecha{color:var(--muted);font-size:13px;margin-left:auto}
+.ped ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.ped .cli{font-weight:700}
+.ped .notas{color:var(--muted);font-size:13px}
+.ped-f{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:10px}
+.ped-f select{width:auto;padding:7px 10px;font-size:14px}
+.ped-f .tot{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;margin-right:auto}
+.ped-f label{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:14px;cursor:pointer}
+.pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--off-bg);color:var(--off)}
+.e-Nuevo{background:var(--price-bg);color:var(--price)}
+.e-Confirmado,.e-Pedido{background:var(--warn-bg);color:var(--warn)}
+.e-Enviado{background:#e3e9f7;color:#1d3a8a}
+.e-Entregado{background:var(--ok-bg);color:var(--ok)}
+.pagado{background:var(--ok-bg);color:var(--ok)}
+.porcobrar{background:var(--warn-bg);color:var(--warn)}
+.lista{display:grid;gap:10px;margin-top:10px}
+.vacio{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+.cat-fila{display:grid;grid-template-columns:1fr 84px;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.cat-fila .ancho{grid-column:1/-1}
+.cat-fila .fila2{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+.equipos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;max-height:300px;overflow-y:auto;padding:2px}
+.seg2{display:flex;flex-wrap:wrap;gap:6px}
+.seg2 button{flex:1 1 auto;border:1px solid var(--line);background:var(--bg);padding:8px 10px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer}
+.seg2 button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips.ligas{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+.chips.ligas button{flex:none;white-space:nowrap;font-size:13px}
+.eq-cab{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.colores{display:flex;gap:4px;justify-content:center}
+.colores input{width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:6px;background:none;cursor:pointer}
+.kit-slot select{width:100%;padding:6px;font-size:12px}
+@media (max-width:420px){.eq-cab{grid-template-columns:1fr}}
+.eq{display:flex;align-items:center;gap:8px;padding:6px 10px 6px 6px;border:1px solid var(--line);background:var(--bg);border-radius:10px;cursor:pointer;font-weight:700;font-size:14px;text-align:left;min-width:0}
+.eq span:last-child{min-width:0;overflow-wrap:anywhere}
+.eq img,.eq-ini{width:38px;height:38px;flex:none;border-radius:7px;object-fit:contain;background:var(--surface);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;color:var(--muted)}
+.eq[aria-pressed="true"],.kit[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.kits{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kit,.kit-slot{display:grid;gap:6px;justify-items:center;align-content:start;padding:6px;border:1px solid var(--line);background:var(--bg);border-radius:10px;font-size:12px;font-weight:700;text-align:center;min-width:0}
+.kit{cursor:pointer}
+.kit img,.kit-slot img,.kit-n{width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:7px;background:var(--surface);display:grid;place-items:center;font-family:var(--f-display);font-size:30px;font-weight:800;color:var(--muted);max-width:100%}
+.kit-l{color:var(--muted);font-size:12px}
+.kit-slot .btn{width:100%;padding:6px 4px;font-size:12px;cursor:pointer}
+.kit-grande{width:100%;max-height:340px;object-fit:contain;border-radius:10px;background:var(--bg);margin-top:4px}
+.pers{display:grid;grid-template-columns:1fr 90px;gap:10px}
+.pers .ancho{grid-column:1/-1}
+.gratis{background:var(--ok-bg);color:var(--ok);font-size:11px;font-weight:800;padding:1px 7px;border-radius:999px;margin-left:4px;letter-spacing:.04em}
+.qrcaja{justify-items:center;text-align:center;margin-top:6px}
+.qrlink{display:block;background:#fff;padding:14px;border-radius:12px;border:1px solid var(--line)}
+.qrlink img{display:block;width:min(260px,70vw);height:auto;image-rendering:pixelated}
+.ajustes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ajustes .ancho{grid-column:1/-1}
+@media (max-width:420px){.resumen{grid-template-columns:1fr 1fr}.resumen .stat:last-child{grid-column:1/-1}.cat-fila .fila2{grid-template-columns:1fr 1fr}.cat-fila .fila2 .btn{grid-column:1/-1}.prod{grid-template-columns:1fr auto}.prod .btn-add{grid-column:1/-1}}
+
+/* césped de la tienda */
+#decor{position:fixed;inset:0;z-index:0;pointer-events:none;display:none}
+#decor svg{width:100%;height:100%}
+#app{position:relative;z-index:1}
+body.cesped{background-color:#276b2d;background-image:radial-gradient(ellipse at 50% -5%,rgba(255,255,255,.12),transparent 55%),radial-gradient(ellipse at 50% 115%,rgba(0,0,0,.38),transparent 55%),repeating-linear-gradient(180deg,rgba(255,255,255,.05) 0 72px,rgba(0,0,0,.05) 72px 144px),linear-gradient(180deg,#2e7934,#22612a)}
+body.cesped #decor{display:block}
+.cesped .marca,.cesped .hero h1,.cesped .grupo>h2,.cesped .titulo,.cesped .volver,.cesped .total span,.cesped .total strong,.cesped .form label,.cesped .enviado-txt{color:#fff;text-shadow:none}
+.cesped .grupo>h2{color:rgba(255,255,255,.85)}
+.cesped .hero p,.cesped .form p{color:rgba(255,255,255,.7)!important}
+.cesped .hero h1 span{color:#ffe14d}
+.cesped .hero p,.cesped .form p{color:rgba(255,255,255,.92)!important}
+.cesped .grupo>h2{letter-spacing:.16em}
+.cesped .info{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.9)}
+.cesped .info b{color:#fff}
+.cesped .total{border-top-color:#fff}
+.cesped .vacio{color:#fff;border-color:rgba(255,255,255,.4);background:rgba(0,0,0,.2)}
+.cesped .barra{background:linear-gradient(transparent,rgba(10,40,15,.7) 35%)}
+.deportes{display:flex;flex-wrap:wrap;gap:8px}
+.deportes span{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.95);color:#0f1830;font-weight:800;font-size:13px;padding:5px 12px 5px 6px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.deportes svg{width:24px;height:24px}
+
+/* estilo profesional */
+.marca,.hero h1,.titulo,.grupo>h2,.precio,.total strong,.stat b,.kit-n,.eq-ini{font-stretch:62%}
+.marca{font-weight:900;letter-spacing:.12em}
+.hero h1{font-weight:900;letter-spacing:0}
+.cesped .hero h1 span{color:var(--gold)}
+.precio{font-style:normal;font-weight:800;border-radius:4px;padding:3px 10px;letter-spacing:.02em}
+.btn{border-radius:6px;letter-spacing:.02em}
+.btn-add{background:#0b0b0c;color:#fff;border-color:#0b0b0c;text-transform:uppercase;font-size:13px;font-weight:800;letter-spacing:.08em}
+.btn-pri{border-radius:8px;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+.prod{border-radius:8px;border-color:transparent;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.prod h3{font-weight:700;letter-spacing:-.005em}
+.grupo>h2{font-weight:800}
+.deportes span{background:rgba(0,0,0,.25);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.4);border-radius:2px;padding:5px 12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+.aviso{border-radius:2px;background:#0b0b0c;color:var(--gold);border:1px solid rgba(216,178,90,.6);font-weight:600;letter-spacing:.04em}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .precio,:root:not([data-theme="light"]) .btn-add{box-shadow:0 0 0 1px rgba(255,255,255,.22)}}
+:root[data-theme="dark"] .precio,:root[data-theme="dark"] .btn-add{box-shadow:0 0 0 1px rgba(255,255,255,.22)}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:sube .22s ease-out}@keyframes sube{from{transform:translateY(24px);opacity:.6}}}
+</style></head><body><div id="app"></div><script type="application/json" id="tienda-datos">{"ajustes":{"tienda":"Bryemky","whatsapp":"34637137006","parches":3,"dorsal":3,"plazo":"15 y 20 días hábiles","temporada":"2026/27"},"equipos":[{"id":"t0","nombre":"Real Madrid","liga":"laliga","col":{"1":["L","#ffffff","#ffffff","#1f5c3a"],"2":["L","#1f4d36","#1f4d36","#f2efe4"],"3":["L","#e86aa8","#e86aa8","#f6f1e1"]},"kits":{"1":"","2":"","3":""}},{"id":"t1","nombre":"Barcelona","liga":"laliga","col":{"1":["R","#a50044","#004d98","#e0b84a"],"2":["L","#2a1638","#2a1638","#c9a227"],"3":["L","#c8e6d0","#c8e6d0","#13224a"]},"kits":{"1":"","2":"","3":""}},{"id":"t2","nombre":"Atlético de Madrid","liga":"laliga","col":{"1":["R","#cb3524","#ffffff","#272e61"],"2":["L","#151515","#151515","#f6d10a"],"3":["A","#8e9196","#cb3524","#272e61"]},"kits":{"1":"","2":"","3":""}},{"id":"t3","nombre":"Athletic Club","liga":"laliga","col":{"1":["R","#ee2523","#ffffff","#151515"],"2":["L","#151515","#151515","#ee2523"],"3":["R","#8ec9ec","#ffffff","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t4","nombre":"Real Betis","liga":"laliga","col":{"1":["R","#0bb363","#ffffff","#0bb363"],"2":["L","#0a7a45","#0a7a45","#c9a227"],"3":["R","#1d4fb8","#151515","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t5","nombre":"Sevilla","liga":"laliga","col":{"1":["L","#ffffff","#ffffff","#d71920"],"2":["L","#d71920","#d71920","#151515"],"3":["L","#151515","#151515","#d71920"]},"kits":{"1":"","2":"","3":""}},{"id":"t6","nombre":"Valencia","liga":"laliga","col":{"1":["L","#ffffff","#ffffff","#151515"],"2":["L","#13224a","#13224a","#f47b20"],"3":["L","#f47b20","#f47b20","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t7","nombre":"Villarreal","liga":"laliga","col":{"1":["L","#ffe667","#ffe667","#005187"],"2":["S","#c9ccd1","#1d4fb8","#ffe667"],"3":["L","#151515","#151515","#ffe667"]},"kits":{"1":"","2":"","3":""}},{"id":"t8","nombre":"Real Sociedad","liga":"laliga","col":{"1":["R","#0067b1","#ffffff","#ffffff"],"2":["L","#151515","#151515","#0067b1"],"3":["L","#f4c430","#f4c430","#0067b1"]},"kits":{"1":"","2":"","3":""}},{"id":"t9","nombre":"Celta de Vigo","liga":"laliga","col":{"1":["L","#8ac3ee","#8ac3ee","#ffffff"],"2":["L","#ffffff","#ffffff","#8ac3ee"],"3":["C","#d71920","#1d4fb8","#1d4fb8"]},"kits":{"1":"","2":"","3":""}},{"id":"t10","nombre":"Osasuna","liga":"laliga","col":{"1":["L","#d71920","#d71920","#13224a"],"2":["L","#13224a","#13224a","#d71920"],"3":["L","#151515","#151515","#4a4a4a"]},"kits":{"1":"","2":"","3":""}},{"id":"t11","nombre":"Mallorca","liga":"espana2","col":{"1":["L","#d71920","#d71920","#151515"],"2":["L","#151515","#151515","#d71920"],"3":["L","#ffffff","#ffffff","#d71920"]},"kits":{"1":"","2":"","3":""}},{"id":"t12","nombre":"Getafe","liga":"laliga","col":{"1":["L","#0057a8","#0057a8","#ffffff"],"2":["L","#d71920","#d71920","#ffffff"],"3":["L","#151515","#151515","#0057a8"]},"kits":{"1":"","2":"","3":""}},{"id":"t13","nombre":"Girona","liga":"espana2","col":{"1":["R","#d71920","#ffffff","#d71920"],"2":["L","#13224a","#13224a","#d71920"],"3":["L","#ffffff","#ffffff","#d71920"]},"kits":{"1":"","2":"","3":""}},{"id":"t14","nombre":"Rayo Vallecano","liga":"laliga","col":{"1":["B","#ffffff","#d71920","#d71920"],"2":["B","#151515","#d71920","#d71920"],"3":["L","#13224a","#13224a","#d71920"]},"kits":{"1":"","2":"","3":""}},{"id":"t15","nombre":"Espanyol","liga":"laliga","col":{"1":["R","#0057a8","#ffffff","#0057a8"],"2":["L","#151515","#151515","#0057a8"],"3":["L","#c6f432","#c6f432","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t16","nombre":"Alavés","liga":"laliga","col":{"1":["R","#0057a8","#ffffff","#0057a8"],"2":["L","#151515","#151515","#f4b6c7"],"3":["L","#ffffff","#ffffff","#0057a8"]},"kits":{"1":"","2":"","3":""}},{"id":"t17","nombre":"Elche","liga":"laliga","col":{"1":["F","#ffffff","#0b7a3b","#0b7a3b"],"2":["L","#4b2a6b","#4b2a6b","#c9a227"],"3":["L","#151515","#151515","#0b7a3b"]},"kits":{"1":"","2":"","3":""}},{"id":"t18","nombre":"Levante","liga":"laliga","col":{"1":["R","#00418d","#a8123e","#00418d"],"2":["R","#151515","#ffffff","#151515"],"3":["L","#151515","#151515","#a8123e"]},"kits":{"1":"","2":"","3":""}},{"id":"t19","nombre":"Real Oviedo","liga":"espana2","col":{"1":["L","#0057a8","#0057a8","#ffffff"],"2":["L","#ffffff","#ffffff","#0057a8"],"3":["L","#151515","#151515","#0057a8"]},"kits":{"1":"","2":"","3":""}},{"id":"t20","nombre":"UD Las Palmas","liga":"espana2","col":{"1":["L","#ffe500","#ffe500","#0055a5"],"2":["L","#0055a5","#0055a5","#ffe500"],"3":["L","#ffffff","#ffffff","#0055a5"]},"kits":{"1":"","2":"","3":""}},{"id":"t21","nombre":"CD Tenerife","liga":"espana2","col":{"1":["L","#ffffff","#ffffff","#0055a5"],"2":["L","#0055a5","#0055a5","#ffffff"],"3":["L","#151515","#151515","#0055a5"]},"kits":{"1":"","2":"","3":""}},{"id":"t22","nombre":"Manchester City","liga":"premier","col":{"1":["L","#6cabdd","#6cabdd","#ffffff"],"2":["L","#151515","#151515","#e0b84a"],"3":["L","#151515","#151515","#6cabdd"]},"kits":{"1":"","2":"","3":""}},{"id":"t23","nombre":"Manchester United","liga":"premier","col":{"1":["L","#da291c","#da291c","#ffffff"],"2":["L","#1d4fb8","#1d4fb8","#da291c"],"3":["L","#151515","#151515","#da291c"]},"kits":{"1":"","2":"","3":""}},{"id":"t24","nombre":"Liverpool","liga":"premier","col":{"1":["L","#7a1f2b","#7a1f2b","#ffffff"],"2":["L","#ffffff","#ffffff","#c8102e"],"3":["L","#ffffff","#ffffff","#c8102e"]},"kits":{"1":"","2":"","3":""}},{"id":"t25","nombre":"Arsenal","liga":"premier","col":{"1":["L","#db0007","#db0007","#6d1a2b"],"2":["L","#13224a","#13224a","#f4c430"],"3":["L","#f3e7a1","#f3e7a1","#13224a"]},"kits":{"1":"","2":"","3":""}},{"id":"t26","nombre":"Chelsea","liga":"premier","col":{"1":["L","#034694","#034694","#c9a227"],"2":["L","#151515","#151515","#c9a227"],"3":["L","#151515","#151515","#034694"]},"kits":{"1":"","2":"","3":""}},{"id":"t27","nombre":"Tottenham","liga":"premier","col":{"1":["L","#ffffff","#ffffff","#132257"],"2":["L","#132257","#132257","#ff4fa3"],"3":["L","#6a3fb5","#6a3fb5","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t28","nombre":"Newcastle","liga":"premier","col":{"1":["R","#151515","#ffffff","#2b7de9"],"2":["L","#13224a","#13224a","#ffffff"],"3":["L","#c9a7c7","#c9a7c7","#4b1f6f"]},"kits":{"1":"","2":"","3":""}},{"id":"t29","nombre":"Aston Villa","liga":"premier","col":{"1":["S","#670e36","#95bfe5","#95bfe5"],"2":["L","#ffffff","#ffffff","#670e36"],"3":["L","#a9d3ee","#a9d3ee","#670e36"]},"kits":{"1":"","2":"","3":""}},{"id":"t31","nombre":"Everton","liga":"premier","col":{"1":["L","#003399","#003399","#f4c430"],"2":["L","#ffffff","#ffffff","#13224a"],"3":["L","#151515","#151515","#003399"]},"kits":{"1":"","2":"","3":""}},{"id":"t32","nombre":"Brighton","liga":"premier","col":{"1":["L","#0057b8","#0057b8","#ffffff"],"2":["L","#ffffff","#ffffff","#0057b8"],"3":["L","#0d5c63","#0d5c63","#2fd3d0"]},"kits":{"1":"","2":"","3":""}},{"id":"t33","nombre":"Nottingham Forest","liga":"premier","col":{"1":["L","#dd0000","#dd0000","#ffffff"],"2":["L","#1f5c3a","#1f5c3a","#dd0000"],"3":["L","#151515","#151515","#dd0000"]},"kits":{"1":"","2":"","3":""}},{"id":"t34","nombre":"Juventus","liga":"seriea","col":{"1":["R","#151515","#ffffff","#151515"],"2":["L","#f2a7c3","#f2a7c3","#151515"],"3":["L","#f4c430","#f4c430","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t35","nombre":"Inter de Milán","liga":"seriea","col":{"1":["R","#151515","#0068a8","#c9a227"],"2":["L","#ffffff","#ffffff","#0068a8"],"3":["L","#f4c430","#f4c430","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t36","nombre":"AC Milan","liga":"seriea","col":{"1":["R","#fb090b","#151515","#151515"],"2":["L","#ffffff","#ffffff","#fb090b"],"3":["L","#13224a","#13224a","#fb090b"]},"kits":{"1":"","2":"","3":""}},{"id":"t37","nombre":"Napoli","liga":"seriea","col":{"1":["L","#12a0d7","#12a0d7","#ffffff"],"2":["L","#ffffff","#ffffff","#12a0d7"],"3":["L","#151515","#151515","#12a0d7"]},"kits":{"1":"","2":"","3":""}},{"id":"t38","nombre":"Roma","liga":"seriea","col":{"1":["L","#8e1f2f","#8e1f2f","#f0bc42"],"2":["L","#ffffff","#ffffff","#8e1f2f"],"3":["L","#151515","#151515","#f0bc42"]},"kits":{"1":"","2":"","3":""}},{"id":"t39","nombre":"Lazio","liga":"seriea","col":{"1":["L","#87d8f7","#87d8f7","#ffffff"],"2":["L","#151515","#151515","#87d8f7"],"3":["L","#ffffff","#ffffff","#87d8f7"]},"kits":{"1":"","2":"","3":""}},{"id":"t40","nombre":"Atalanta","liga":"seriea","col":{"1":["R","#1e71b8","#151515","#151515"],"2":["L","#ffffff","#ffffff","#1e71b8"],"3":["L","#151515","#151515","#1e71b8"]},"kits":{"1":"","2":"","3":""}},{"id":"t41","nombre":"Fiorentina","liga":"seriea","col":{"1":["L","#5b2a86","#5b2a86","#ffffff"],"2":["L","#ffffff","#ffffff","#5b2a86"],"3":["L","#151515","#151515","#5b2a86"]},"kits":{"1":"","2":"","3":""}},{"id":"t42","nombre":"Bayern de Múnich","liga":"bundesliga","col":{"1":["L","#b8001f","#b8001f","#c9a227"],"2":["L","#ffffff","#ffffff","#dc052d"],"3":["L","#ffffff","#ffffff","#dc052d"]},"kits":{"1":"","2":"","3":""}},{"id":"t43","nombre":"Borussia Dortmund","liga":"bundesliga","col":{"1":["L","#fde100","#fde100","#151515"],"2":["L","#2d2d2d","#2d2d2d","#ffffff"],"3":["L","#ffffff","#ffffff","#fde100"]},"kits":{"1":"","2":"","3":""}},{"id":"t44","nombre":"Bayer Leverkusen","liga":"bundesliga","col":{"1":["L","#e32221","#e32221","#151515"],"2":["L","#ffffff","#ffffff","#e32221"],"3":["L","#151515","#151515","#e32221"]},"kits":{"1":"","2":"","3":""}},{"id":"t45","nombre":"RB Leipzig","liga":"bundesliga","col":{"1":["L","#ffffff","#ffffff","#dd0741"],"2":["L","#13224a","#13224a","#dd0741"],"3":["L","#dd0741","#dd0741","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t46","nombre":"Eintracht Frankfurt","liga":"bundesliga","col":{"1":["L","#ffffff","#ffffff","#e1000f"],"2":["L","#151515","#151515","#e1000f"],"3":["L","#e1000f","#e1000f","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t47","nombre":"Stuttgart","liga":"bundesliga","col":{"1":["F","#ffffff","#e32219","#e32219"],"2":["L","#e32219","#e32219","#ffffff"],"3":["L","#151515","#151515","#e32219"]},"kits":{"1":"","2":"","3":""}},{"id":"t48","nombre":"Paris Saint-Germain","liga":"ligue1","col":{"1":["V","#1b2a5a","#da291c","#ffffff"],"2":["L","#ffffff","#ffffff","#1b2a5a"],"3":["L","#151515","#151515","#da291c"]},"kits":{"1":"","2":"","3":""}},{"id":"t49","nombre":"Olympique de Marsella","liga":"ligue1","col":{"1":["L","#ffffff","#ffffff","#2faee0"],"2":["L","#2faee0","#2faee0","#ffffff"],"3":["L","#151515","#151515","#2faee0"]},"kits":{"1":"","2":"","3":""}},{"id":"t50","nombre":"Olympique de Lyon","liga":"ligue1","col":{"1":["L","#ffffff","#ffffff","#da291c"],"2":["L","#13224a","#13224a","#da291c"],"3":["L","#151515","#151515","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t51","nombre":"Mónaco","liga":"ligue1","col":{"1":["D","#e7001d","#ffffff","#ffffff"],"2":["L","#151515","#151515","#e7001d"],"3":["L","#ffffff","#ffffff","#e7001d"]},"kits":{"1":"","2":"","3":""}},{"id":"t52","nombre":"Lille","liga":"ligue1","col":{"1":["L","#e01e13","#e01e13","#13224a"],"2":["L","#ffffff","#ffffff","#e01e13"],"3":["L","#151515","#151515","#e01e13"]},"kits":{"1":"","2":"","3":""}},{"id":"t53","nombre":"Benfica","liga":"portugal","col":{"1":["L","#e83030","#e83030","#ffffff"],"2":["L","#151515","#151515","#e83030"],"3":["L","#ffffff","#ffffff","#e83030"]},"kits":{"1":"","2":"","3":""}},{"id":"t54","nombre":"Oporto","liga":"portugal","col":{"1":["R","#0062b0","#ffffff","#0062b0"],"2":["L","#f4c430","#f4c430","#0062b0"],"3":["L","#151515","#151515","#0062b0"]},"kits":{"1":"","2":"","3":""}},{"id":"t55","nombre":"Sporting de Portugal","liga":"portugal","col":{"1":["A","#008057","#ffffff","#008057"],"2":["L","#151515","#151515","#008057"],"3":["L","#ffffff","#ffffff","#008057"]},"kits":{"1":"","2":"","3":""}},{"id":"t56","nombre":"Ajax","liga":"otraseu","col":{"1":["V","#ffffff","#d2122e","#d2122e"],"2":["L","#13224a","#13224a","#ffffff"],"3":["L","#151515","#151515","#d2122e"]},"kits":{"1":"","2":"","3":""}},{"id":"t57","nombre":"PSV","liga":"otraseu","col":{"1":["R","#ed1c24","#ffffff","#ed1c24"],"2":["L","#151515","#151515","#ed1c24"],"3":["L","#ffffff","#ffffff","#ed1c24"]},"kits":{"1":"","2":"","3":""}},{"id":"t58","nombre":"Feyenoord","liga":"otraseu","col":{"1":["M","#e3001b","#ffffff","#151515"],"2":["L","#151515","#151515","#e3001b"],"3":["L","#ffffff","#ffffff","#e3001b"]},"kits":{"1":"","2":"","3":""}},{"id":"t59","nombre":"Celtic","liga":"otraseu","col":{"1":["A","#018749","#ffffff","#c9a227"],"2":["R","#a7c4b5","#151515","#151515"],"3":["L","#ffffff","#ffffff","#018749"]},"kits":{"1":"","2":"","3":""}},{"id":"t60","nombre":"Rangers","liga":"otraseu","col":{"1":["L","#0045a7","#0045a7","#ffffff"],"2":["L","#ffffff","#ffffff","#0045a7"],"3":["L","#151515","#151515","#0045a7"]},"kits":{"1":"","2":"","3":""}},{"id":"t61","nombre":"Galatasaray","liga":"otraseu","col":{"1":["M","#a90432","#fdb912","#fdb912"],"2":["L","#ffffff","#ffffff","#a90432"],"3":["L","#151515","#151515","#fdb912"]},"kits":{"1":"","2":"","3":""}},{"id":"t62","nombre":"Fenerbahçe","liga":"otraseu","col":{"1":["R","#0e1b4b","#fae00f","#fae00f"],"2":["L","#ffffff","#ffffff","#0e1b4b"],"3":["L","#fae00f","#fae00f","#0e1b4b"]},"kits":{"1":"","2":"","3":""}},{"id":"t63","nombre":"Beşiktaş","liga":"otraseu","col":{"1":["L","#ffffff","#ffffff","#151515"],"2":["L","#151515","#151515","#ffffff"],"3":["L","#d71920","#d71920","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t64","nombre":"Boca Juniors","liga":"argentina","col":{"1":["F","#00338d","#fcb514","#fcb514"],"2":["L","#fcb514","#fcb514","#00338d"],"3":["L","#ffffff","#ffffff","#00338d"]},"kits":{"1":"","2":"","3":""}},{"id":"t65","nombre":"River Plate","liga":"argentina","col":{"1":["B","#ffffff","#e30613","#e30613"],"2":["B","#151515","#e30613","#e30613"],"3":["L","#e30613","#e30613","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t66","nombre":"Flamengo","liga":"brasil","col":{"1":["A","#c4161c","#151515","#151515"],"2":["L","#ffffff","#ffffff","#c4161c"],"3":["L","#151515","#151515","#c4161c"]},"kits":{"1":"","2":"","3":""}},{"id":"t67","nombre":"Palmeiras","liga":"brasil","col":{"1":["L","#006437","#006437","#ffffff"],"2":["L","#ffffff","#ffffff","#006437"],"3":["L","#151515","#151515","#006437"]},"kits":{"1":"","2":"","3":""}},{"id":"t68","nombre":"Corinthians","liga":"brasil","col":{"1":["L","#ffffff","#ffffff","#151515"],"2":["L","#151515","#151515","#ffffff"],"3":["L","#8a1538","#8a1538","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t69","nombre":"Santos","liga":"brasil","col":{"1":["L","#ffffff","#ffffff","#151515"],"2":["R","#151515","#ffffff","#151515"],"3":["L","#13224a","#13224a","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t70","nombre":"Club América","liga":"mexico","col":{"1":["L","#ffe600","#ffe600","#00205b"],"2":["L","#00205b","#00205b","#ffe600"],"3":["L","#151515","#151515","#ffe600"]},"kits":{"1":"","2":"","3":""}},{"id":"t71","nombre":"Chivas","liga":"mexico","col":{"1":["R","#d50032","#ffffff","#13224a"],"2":["L","#13224a","#13224a","#d50032"],"3":["L","#151515","#151515","#d50032"]},"kits":{"1":"","2":"","3":""}},{"id":"t72","nombre":"Inter Miami","liga":"mls","col":{"1":["L","#f7b5cd","#f7b5cd","#231f20"],"2":["L","#231f20","#231f20","#f7b5cd"],"3":["L","#ffffff","#ffffff","#f7b5cd"]},"kits":{"1":"","2":"","3":""}},{"id":"t73","nombre":"LA Galaxy","liga":"mls","col":{"1":["L","#ffffff","#ffffff","#00245d"],"2":["L","#00245d","#00245d","#ffd200"],"3":["L","#151515","#151515","#ffd200"]},"kits":{"1":"","2":"","3":""}},{"id":"t74","nombre":"LAFC","liga":"mls","col":{"1":["L","#151515","#151515","#c39e6d"],"2":["L","#ffffff","#ffffff","#c39e6d"],"3":["L","#c39e6d","#c39e6d","#151515"]},"kits":{"1":"","2":"","3":""}},{"id":"t75","nombre":"Al Nassr","liga":"saudi","col":{"1":["L","#fbe122","#fbe122","#13224a"],"2":["L","#13224a","#13224a","#fbe122"],"3":["L","#ffffff","#ffffff","#fbe122"]},"kits":{"1":"","2":"","3":""}},{"id":"t76","nombre":"Al Hilal","liga":"saudi","col":{"1":["L","#0057b8","#0057b8","#ffffff"],"2":["L","#ffffff","#ffffff","#0057b8"],"3":["L","#151515","#151515","#0057b8"]},"kits":{"1":"","2":"","3":""}},{"id":"t77","nombre":"Al Ittihad","liga":"saudi","col":{"1":["R","#fbe122","#151515","#151515"],"2":["L","#ffffff","#ffffff","#151515"],"3":["L","#151515","#151515","#fbe122"]},"kits":{"1":"","2":"","3":""}},{"id":"t78","nombre":"España","liga":"sel","col":{"1":["L","#c60b1e","#c60b1e","#f1bf00"],"2":["L","#f3ecd8","#f3ecd8","#c60b1e"],"3":["L","#13224a","#13224a","#f1bf00"]},"kits":{"1":"","2":"","3":""}},{"id":"t79","nombre":"Portugal","liga":"sel","col":{"1":["L","#c8102e","#c8102e","#00807a"],"2":["L","#ffffff","#ffffff","#2bb3b1"],"3":["L","#151515","#151515","#c8102e"]},"kits":{"1":"","2":"","3":""}},{"id":"t80","nombre":"Francia","liga":"sel","col":{"1":["L","#1b2a5a","#1b2a5a","#2f6fd6"],"2":["L","#2e8b7a","#2e8b7a","#ffffff"],"3":["L","#6cace4","#6cace4","#21304d"]},"kits":{"1":"","2":"","3":""}},{"id":"t81","nombre":"Inglaterra","liga":"sel","col":{"1":["L","#ffffff","#ffffff","#c8102e"],"2":["L","#c8102e","#c8102e","#ffffff"],"3":["L","#13224a","#13224a","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t82","nombre":"Alemania","liga":"sel","col":{"1":["L","#ffffff","#ffffff","#151515"],"2":["L","#13224a","#13224a","#2bb3b1"],"3":["L","#13224a","#13224a","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t83","nombre":"Italia","liga":"sel","col":{"1":["L","#0066cc","#0066cc","#ffffff"],"2":["L","#ffffff","#ffffff","#0066cc"],"3":["L","#151515","#151515","#0066cc"]},"kits":{"1":"","2":"","3":""}},{"id":"t84","nombre":"Países Bajos","liga":"sel","col":{"1":["L","#f36c21","#f36c21","#13224a"],"2":["F","#ffffff","#f36c21","#f36c21"],"3":["L","#ffffff","#ffffff","#f36c21"]},"kits":{"1":"","2":"","3":""}},{"id":"t85","nombre":"Bélgica","liga":"sel","col":{"1":["L","#a5172c","#a5172c","#f1bf00"],"2":["L","#ffffff","#ffffff","#f4a6c7"],"3":["L","#151515","#151515","#f1bf00"]},"kits":{"1":"","2":"","3":""}},{"id":"t86","nombre":"Croacia","liga":"sel","col":{"1":["C","#e31b23","#ffffff","#13224a"],"2":["C","#13224a","#1d4fb8","#1d4fb8"],"3":["L","#151515","#151515","#e31b23"]},"kits":{"1":"","2":"","3":""}},{"id":"t87","nombre":"Argentina","liga":"sel","col":{"1":["R","#75aadb","#ffffff","#151515"],"2":["L","#151515","#151515","#3a7bd5"],"3":["L","#151515","#151515","#75aadb"]},"kits":{"1":"","2":"","3":""}},{"id":"t88","nombre":"Brasil","liga":"sel","col":{"1":["L","#ffdc02","#ffdc02","#009c3b"],"2":["L","#13224a","#13224a","#2f6fd6"],"3":["L","#151515","#151515","#ffdc02"]},"kits":{"1":"","2":"","3":""}},{"id":"t89","nombre":"Uruguay","liga":"sel","col":{"1":["L","#5cbfeb","#5cbfeb","#151515"],"2":["L","#13224a","#13224a","#2f80ed"],"3":["L","#151515","#151515","#5cbfeb"]},"kits":{"1":"","2":"","3":""}},{"id":"t90","nombre":"Colombia","liga":"sel","col":{"1":["L","#fcd116","#fcd116","#003893"],"2":["F","#138a8a","#13224a","#13224a"],"3":["L","#ffffff","#ffffff","#ce1126"]},"kits":{"1":"","2":"","3":""}},{"id":"t91","nombre":"Venezuela","liga":"sel","col":{"1":["L","#7b1c2e","#7b1c2e","#ffffff"],"2":["L","#ffffff","#ffffff","#7b1c2e"],"3":["L","#151515","#151515","#7b1c2e"]},"kits":{"1":"","2":"","3":""}},{"id":"t92","nombre":"México","liga":"sel","col":{"1":["L","#006847","#006847","#0a3d2a"],"2":["L","#ffffff","#ffffff","#006847"],"3":["L","#151515","#151515","#ce1126"]},"kits":{"1":"","2":"","3":""}},{"id":"t93","nombre":"Estados Unidos","liga":"sel","col":{"1":["A","#ffffff","#c8102e","#13224a"],"2":["L","#13224a","#13224a","#ffffff"],"3":["L","#c8102e","#c8102e","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t94","nombre":"Marruecos","liga":"sel","col":{"1":["L","#c1272d","#c1272d","#006233"],"2":["L","#f3ecd8","#f3ecd8","#006233"],"3":["L","#006233","#006233","#ffffff"]},"kits":{"1":"","2":"","3":""}},{"id":"t95","nombre":"Senegal","liga":"sel","col":{"1":["L","#ffffff","#ffffff","#00853f"],"2":["L","#00853f","#00853f","#f47b20"],"3":["L","#151515","#151515","#00853f"]},"kits":{"1":"","2":"","3":""}},{"id":"t96","nombre":"Japón","liga":"sel","col":{"1":["L","#1d2a6b","#1d2a6b","#ffffff"],"2":["L","#f3ecd8","#f3ecd8","#1d2a6b"],"3":["L","#151515","#151515","#0f2a6b"]},"kits":{"1":"","2":"","3":""}},{"id":"n0","nombre":"Deportivo de La Coruña","liga":"laliga","col":{"1":["R","#0057b8","#ffffff","#0057b8"],"2":["L","#151515","#151515","#6cace4"],"3":["L","#ffffff","#ffffff","#0057b8"]},"kits":{"1":"","2":"","3":""}},{"id":"n1","nombre":"Málaga","liga":"laliga","col":{"1":["R","#3a8fd6","#ffffff","#3a8fd6"],"2":["L","#13224a","#13224a","#3a8fd6"],"3":["L","#ffffff","#ffffff","#3a8fd6"]},"kits":{"1":"","2":"","3":""}},{"id":"n2","nombre":"Racing de Santander","liga":"laliga","col":{"1":["L","#ffffff","#ffffff","#00843d"],"2":["R","#00843d","#0a5e2c","#c9a227"],"3":["L","#151515","#151515","#00843d"]},"kits":{"1":"","2":"","3":""}},{"id":"n3","nombre":"Sunderland","liga":"premier","col":{"1":["R","#e2231a","#ffffff","#ffffff"],"2":["L","#f7a8c8","#f7a8c8","#151515"],"3":["L","#151515","#151515","#e2231a"]},"kits":{"1":"","2":"","3":""}},{"id":"n4","nombre":"Leeds United","liga":"premier","col":{"1":["L","#ffffff","#ffffff","#1d4fb8"],"2":["L","#f4c430","#f4c430","#1d4fb8"],"3":["L","#1d4fb8","#1d4fb8","#f4c430"]},"kits":{"1":"","2":"","3":""}},{"id":"n5","nombre":"Crystal Palace","liga":"premier","col":{"1":["B","#ffffff","#c8102e","#1b458f"],"2":["L","#151515","#151515","#c8102e"],"3":["L","#1b458f","#1b458f","#c8102e"]},"kits":{"1":"","2":"","3":""}},{"id":"n6","nombre":"Fulham","liga":"premier","col":{"1":["L","#ffffff","#ffffff","#cc0000"],"2":["C","#cc0000","#151515","#151515"],"3":["L","#87ceeb","#87ceeb","#ff4fa3"]},"kits":{"1":"","2":"","3":""}}],"productos":[{"id":"c1","nombre":"Manga corta","desc":"Versión aficionado","grupo":"Camisetas","precio":28,"tallas":"adulto"},{"id":"c2","nombre":"Versión jugador","desc":"Corte y tejido de jugador","grupo":"Camisetas","precio":33,"tallas":"adulto"},{"id":"c3","nombre":"Manga larga","desc":"Versión aficionado","grupo":"Camisetas","precio":33,"tallas":"adulto"},{"id":"c4","nombre":"Manga larga versión jugador","desc":"Corte y tejido de jugador","grupo":"Camisetas","precio":35,"tallas":"adulto"},{"id":"c5","nombre":"NBA, Fórmula 1 y retro","desc":"Camisetas de baloncesto, F1 y clásicas","grupo":"Camisetas","precio":33,"tallas":"adulto"},{"id":"k1","nombre":"Conjunto NBA corto","desc":"Camiseta y pantalón","grupo":"Conjuntos","precio":45,"tallas":"adulto"},{"id":"k2","nombre":"Conjunto de fútbol adulto corto","desc":"Camiseta y pantalón corto","grupo":"Conjuntos","precio":38,"tallas":"adulto"},{"id":"k3","nombre":"Conjunto de fútbol adulto largo","desc":"Manga larga y pantalón largo","grupo":"Conjuntos","precio":55,"tallas":"adulto"},{"id":"k4","nombre":"Conjunto de niños","desc":"Camiseta y pantalón","grupo":"Conjuntos","precio":35,"tallas":"nino"}],"ligas":[{"id":"laliga","nombre":"LaLiga (España)","tipo":"europa"},{"id":"espana2","nombre":"España: Segunda y otros","tipo":"europa"},{"id":"premier","nombre":"Premier League","tipo":"europa"},{"id":"seriea","nombre":"Serie A (Italia)","tipo":"europa"},{"id":"bundesliga","nombre":"Bundesliga","tipo":"europa"},{"id":"ligue1","nombre":"Ligue 1 (Francia)","tipo":"europa"},{"id":"portugal","nombre":"Liga Portugal","tipo":"europa"},{"id":"otraseu","nombre":"Otras ligas europeas","tipo":"europa"},{"id":"argentina","nombre":"Argentina","tipo":"mundo"},{"id":"brasil","nombre":"Brasil","tipo":"mundo"},{"id":"mexico","nombre":"México","tipo":"mundo"},{"id":"mls","nombre":"MLS (EE. UU.)","tipo":"mundo"},{"id":"saudi","nombre":"Arabia Saudí","tipo":"mundo"},{"id":"sel","nombre":"Selecciones","tipo":"sel"}]}</script><script id="programa">
+(function(){
+"use strict";
+var $app=document.getElementById('app');
+var DATA=JSON.parse(document.getElementById('tienda-datos').textContent);
+var AJ=DATA.ajustes;
+if(!Array.isArray(DATA.equipos))DATA.equipos=[];
+var KITS=[['1','1ª equipación'],['2','2ª equipación'],['3','3ª equipación']];
+function kitTxt(k){return k?k+'ª':'';}
+var DEF_COL={'1':['L','#1d47e6','#1d47e6','#ffffff'],'2':['L','#ffffff','#ffffff','#0f1830'],'3':['L','#151b2b','#151b2b','#f2b45a']};
+var PATRONES=[['L','Lisa'],['R','Rayas verticales'],['A','Aros horizontales'],['F','Franja en el pecho'],['B','Banda diagonal'],['V','Franja central'],['M','Mitades'],['D','Diagonal partida'],['S','Mangas de otro color'],['C','Cuadros']];
+var PARCHES=['Sin parche','Liga','Champions League','Europa League','Conference League','Mundial 2026'];
+var ICO={
+ balon:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#fff" stroke="#151515" stroke-width="2"/><polygon points="20,12 27,17 24.5,25 15.5,25 13,17" fill="#151515"/><path d="M20 12V4M27 17l7-3M24.5 25l5 6M15.5 25l-5 6M13 17l-7-3" stroke="#151515" stroke-width="2"/></svg>',
+ basket:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#e8742a" stroke="#151515" stroke-width="2"/><path d="M2 20h36M20 2v36M7 7c7 7 7 19 0 26M33 7c-7 7-7 19 0 26" fill="none" stroke="#151515" stroke-width="2"/></svg>',
+ f1:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="4" width="3" height="34" fill="#ddd"/><g transform="translate(8 5)"><rect width="28" height="20" fill="#fff"/><path d="M0 0h7v5H0zM14 0h7v5h-7zM7 5h7v5H7zM21 5h7v5h-7zM0 10h7v5H0zM14 10h7v5h-7zM7 15h7v5H7zM21 15h7v5h-7z" fill="#151515"/></g></svg>'
+};
+var DECOR='<svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+
+ '<g fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2"><rect x="20" y="20" width="360" height="760"/><line x1="20" y1="400" x2="380" y2="400"/><circle cx="200" cy="400" r="62"/><circle cx="200" cy="400" r="3" fill="#fff"/><rect x="95" y="20" width="210" height="110"/><rect x="150" y="20" width="100" height="40"/><path d="M160 130a40 40 0 0 0 80 0"/><rect x="95" y="670" width="210" height="110"/><rect x="150" y="740" width="100" height="40"/><path d="M160 670a40 40 0 0 1 80 0"/></g>'+
+ '</svg>';
+(function(){try{var d=document.createElement('div');d.id='decor';d.innerHTML=DECOR;document.body.insertBefore(d,document.body.firstChild);}catch(e){}})();
+var TIPOS=[['europa','Ligas europeas'],['mundo','Otras ligas'],['sel','Selecciones']];
+var CACHE_CAM={};
+function camiseta(sp,k,mini){
+  sp=sp||DEF_COL[k]||DEF_COL['1'];
+  var key=sp.join(',')+'|'+k+'|'+(mini?1:0);if(CACHE_CAM[key])return CACHE_CAM[key];
+  var p=sp[0],c1=sp[1],c2=sp[2]||sp[1],t=sp[3]||'#ffffff',x='',i,j;
+  if(p==='R'){for(i=0;i<300;i+=50)x+='<rect x="'+(i+25)+'" y="0" width="25" height="400" fill="'+c2+'"/>';}
+  else if(p==='A'){for(j=40;j<340;j+=50)x+='<rect x="0" y="'+(j+25)+'" width="300" height="25" fill="'+c2+'"/>';}
+  else if(p==='F')x='<rect x="0" y="138" width="300" height="58" fill="'+c2+'"/>';
+  else if(p==='B')x='<polygon points="196,40 252,40 104,330 48,330" fill="'+c2+'"/>';
+  else if(p==='V')x='<rect x="118" y="0" width="64" height="400" fill="'+c2+'"/>';
+  else if(p==='M')x='<rect x="150" y="0" width="150" height="400" fill="'+c2+'"/>';
+  else if(p==='D')x='<polygon points="300,40 300,330 10,330" fill="'+c2+'"/>';
+  else if(p==='S')x='<rect x="0" y="0" width="77" height="400" fill="'+c2+'"/><rect x="223" y="0" width="77" height="400" fill="'+c2+'"/>';
+  else if(p==='C'){for(i=0;i<300;i+=30)for(j=30;j<340;j+=30)if(((i+j)/30)%2)x+='<rect x="'+i+'" y="'+j+'" width="30" height="30" fill="'+c2+'"/>';}
+  var cuerpo='M108 48 L58 68 L16 132 L58 160 L76 140 L76 318 L224 318 L224 140 L242 160 L284 132 L242 68 L192 48 Q150 92 108 48 Z';
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+(mini?'10 36 280 292':'0 0 300 400')+'">'+(mini?'':'<rect width="300" height="400" fill="#eef1f7"/>')+
+    '<defs><clipPath id="c"><path d="'+cuerpo+'"/></clipPath></defs>'+
+    '<path d="'+cuerpo+'" fill="'+c1+'"/>'+
+    '<g clip-path="url(#c)">'+x+'<path d="M16 132 L58 160 L64 150 L24 122 Z M284 132 L242 160 L236 150 L276 122 Z" fill="'+t+'"/></g>'+
+    '<path d="M108 48 Q150 92 192 48" fill="none" stroke="'+t+'" stroke-width="9"/>'+
+    '<path d="'+cuerpo+'" fill="none" stroke="#0f1830" stroke-opacity=".3" stroke-width="3"/>'+
+    (mini?'':'<text x="150" y="370" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="30" letter-spacing="2" fill="#0f1830">'+k+'ª EQUIPACIÓN</text>')+'</svg>';
+  return CACHE_CAM[key]='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+}
+function ligasDe(tipo){return (DATA.ligas||[]).filter(function(l){return l.tipo===tipo;});}
+function ligaNombre(id){var l=(DATA.ligas||[]).filter(function(x){return x.id===id;})[0];return l?l.nombre:'';}
+function specDe(t,k){return (t&&t.col&&t.col[k])||DEF_COL[k];}
+function imgKit(t,k,mini){var id=t&&t.kits?t.kits[k]:'';return id?foto(id):camiseta(specDe(t,k),k,mini);}
+function foto(id){return !id?'':/^(data:|https?:)/.test(id)?id:'/_blob/'+id;}
+function equipo(id){for(var i=0;i<DATA.equipos.length;i++)if(DATA.equipos[i].id===id)return DATA.equipos[i];return null;}
+var TALLAS={adulto:['S','M','L','XL','2XL'],nino:['16','18','20','22','24','26','28'],unica:['Única']};
+var TALLAS_TXT={adulto:'Adulto (S–2XL)',nino:'Niño (16–28)',unica:'Talla única'};
+var TIENDA_URL='https://claude.ai/artifact/98YQFENobUMMokmt3YEdU4';
+var QR_IMG='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlAQAAAADt5R2uAAAA5klEQVR42mP8z8DA8JOJgYGBgYHhgMu1DRKM9/uZ0xhZPnF3Kx9hYrhzioGBieHN3wQGhvtBpuU3mB4yK9x0YPh/OeH/D6Z7pnoHHzC92i/5zoHxS9SLACOW2x4sXxmY5PMYniswMT64JqLAwtLr+t6B4epyPvYfzBGHOniZmLiVcy0TmLTOfL2ygOHL3jTlGyz/2vIEGBhuv43W2sH4I/n9ZWnGz7MvqRozXb/hU/OA4f/95XclGA4Ei1zZwSQvr8LJwPTptcrjBywMPOwT1ZkYuPz+M7DwMR5zT2R6eOkIewIjko8ApuZTNcrdd9cAAAAASUVORK5CYII=';
+var ESTADOS=['Nuevo','Confirmado','Pedido al proveedor','Enviado','Entregado','Cancelado'];
+var FONT_LINK='<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">';
+var RESET=':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function eur(n){n=Math.round((+n||0)*100)/100;return n.toLocaleString('es-ES',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+'€';}
+function num(s){s=String(s).replace(/[^\d,.\-]/g,'');if(s.indexOf(',')>-1){s=s.replace(/\./g,'').replace(',','.');}return parseFloat(s)||0;}
+function limpio(s){return String(s||'').replace(/[|\r\n]+/g,' ').trim();}
+function nuevoCodigo(){var a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',c='BRY-';for(var i=0;i<5;i++)c+=a[Math.floor(Math.random()*a.length)];return c;}
+function telBonito(t){var d=String(t).replace(/\D/g,'');if(d.indexOf('34')===0&&d.length===11)d=d.slice(2);return d.replace(/(\d{3})(\d{2})(\d{2})(\d{2})/,'$1 $2 $3 $4');}
+function prod(id){for(var i=0;i<DATA.productos.length;i++)if(DATA.productos[i].id===id)return DATA.productos[i];return null;}
+function grupos(lista){var g=[];lista.forEach(function(p){if(g.indexOf(p.grupo)<0)g.push(p.grupo);});return g;}
+
+var st={vista:'tienda',carrito:[],cliente:'',notas:'',codigo:nuevoCodigo(),sheet:null,errCarrito:'',enviado:false,copiado:'',
+  owner:false,db:null,art:null,pedidos:null,dbErr:'',gtab:'pedidos',filtro:'Todos',pegar:'',msg:'',msgOk:false,borrar:null,cat:null,catMsg:'',catBorrar:null,pub:false,assets:null,subiendo:{},fotoMsg:''};
+
+try{var g=JSON.parse(localStorage.getItem('bry-carrito')||'null');if(g&&Array.isArray(g.carrito)){st.carrito=g.carrito;st.cliente=g.cliente||'';st.notas=g.notas||'';}}catch(e){}
+function guardarLocal(){try{localStorage.setItem('bry-carrito',JSON.stringify({carrito:st.carrito,cliente:st.cliente,notas:st.notas}));}catch(e){}}
+
+function precioDorsal(){return AJ.dorsal==null?3:(+AJ.dorsal||0);}
+function unidad(it){return (+it.precio||0)+(it.dorsal?precioDorsal():0);}
+function total(){return st.carrito.reduce(function(a,it){return a+unidad(it)*it.cant;},0);}
+function nArt(){return st.carrito.reduce(function(a,it){return a+it.cant;},0);}
+
+function texto(){
+  var L=['*Nuevo pedido '+st.codigo+'*','Cliente: '+limpio(st.cliente)];
+  if(limpio(st.notas))L.push('Notas: '+limpio(st.notas));
+  L.push('');
+  st.carrito.forEach(function(it,i){
+    L.push((i+1)+') '+it.nombre+' | Equipo: '+limpio(it.equipo)+(it.kit?' | Equipación: '+kitTxt(it.kit):'')+' | Talla: '+it.talla+(limpio(it.dorsal)?' | Nombre y dorsal: '+limpio(it.dorsal):'')+(it.parche?' | Parche: '+it.parche:'')+' | Cant: '+it.cant+' | '+eur(unidad(it)*it.cant));
+  });
+  L.push('','Total: '+eur(total()));
+  return L.join('\n');
+}
+function waHref(){return 'https://wa.me/'+String(AJ.whatsapp).replace(/\D/g,'')+'?text='+encodeURIComponent(texto());}
+
+function parsear(t){
+  t=String(t||'').replace(/\*/g,'');
+  var cod=(t.match(/BRY-[A-Z0-9]{4,8}/)||[])[0];
+  var cli=((t.match(/Cliente:\s*(.+)/)||[])[1]||'').trim();
+  var notas=((t.match(/Notas:\s*(.+)/)||[])[1]||'').trim();
+  var items=[];
+  t.split('\n').forEach(function(l){
+    var m=l.match(/^\s*\d+\)\s*(.+)$/);if(!m)return;
+    var p=m[1].split('|').map(function(s){return s.trim();});
+    var it={producto:p[0],equipo:'',equipacion:'',talla:'',dorsal:'',cant:1,importe:0};
+    p.slice(1).forEach(function(f){
+      var v=f.replace(/^[^:]*:\s*/,'');
+      if(/^Equipo:/i.test(f))it.equipo=v;
+      else if(/^Equipaci[oó]n:/i.test(f))it.equipacion=v;
+      else if(/^Talla:/i.test(f))it.talla=v;
+      else if(/^Parches?:/i.test(f)){if(/^(s[ií]|no)$/i.test(v))it.parches=/^s/i.test(v);else it.parche=v;}
+      else if(/^(Nombre y dorsal|Personalizaci[oó]n):/i.test(f))it.dorsal=v;
+      else if(/^Cant:/i.test(f))it.cant=parseInt(v,10)||1;
+      else if(/€\s*$/.test(f))it.importe=num(f);
+    });
+    items.push(it);
+  });
+  if(!cod||!items.length)return null;
+  var tot=(t.match(/Total:\s*([\d.,]+)/)||[])[1];
+  return {codigo:cod,cliente:cli,notas:notas,items:items,total:tot?num(tot):items.reduce(function(a,b){return a+b.importe;},0)};
+}
+
+/* ---------- vistas cliente ---------- */
+function cabecera(){
+  var h='<div class="top"><div class="marca">'+esc(AJ.tienda)+'</div>';
+  if(st.owner)h+='<div class="seg" role="group" aria-label="Vista"><button data-act="vista" data-v="tienda" aria-pressed="'+(st.vista!=='gestion')+'">Tienda</button><button data-act="vista" data-v="gestion" aria-pressed="'+(st.vista==='gestion')+'">Gestión</button></div>';
+  return h+'</div>';
+}
+function vTienda(){
+  var h=cabecera();
+  h+='<section class="hero"><svg class="escena" viewBox="0 0 520 120" role="img" aria-label="Balón de fútbol, balón de baloncesto, coche de carreras y bandera a cuadros"><path d="M0 104H520" stroke="#fff" stroke-opacity=".55" stroke-width="3"/><path d="M200 104a60 60 0 0 1 120 0" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/><g transform="translate(60 72)"><circle r="30" fill="#fff" stroke="#0f1830" stroke-width="2"/><polygon points="0,-12 11.4,-3.7 7.1,9.7 -7.1,9.7 -11.4,-3.7" fill="#0f1830"/><path d="M0 -12V-30M11.4 -3.7L28 -9M7.1 9.7L17 24M-7.1 9.7L-17 24M-11.4 -3.7L-28 -9" stroke="#0f1830" stroke-width="2"/></g><g transform="translate(160 76)"><circle r="26" fill="#e8742a" stroke="#3a1a08" stroke-width="2"/><path d="M-26 0H26M0 -26V26M-18 -18Q-4 0 -18 18M18 -18Q4 0 18 18" fill="none" stroke="#3a1a08" stroke-width="2"/></g><g transform="translate(250 58)"><path d="M0 34h22l14-14h40l10-10h26l6 10h30v10l22 6v12H0z" fill="#e10600"/><path d="M58 20h22v-8H66z" fill="#0f1830"/><rect x="150" y="30" width="22" height="6" fill="#0f1830"/><circle cx="34" cy="50" r="13" fill="#151515"/><circle cx="34" cy="50" r="5" fill="#bbb"/><circle cx="140" cy="50" r="13" fill="#151515"/><circle cx="140" cy="50" r="5" fill="#bbb"/></g><g transform="translate(450 18)"><path d="M0 0V86" stroke="#fff" stroke-width="4"/><rect x="2" y="0" width="12" height="12" fill="#151515"/><rect x="2" y="12" width="12" height="12" fill="#fff"/><rect x="2" y="24" width="12" height="12" fill="#151515"/><rect x="2" y="36" width="12" height="12" fill="#fff"/><rect x="14" y="0" width="12" height="12" fill="#fff"/><rect x="14" y="12" width="12" height="12" fill="#151515"/><rect x="14" y="24" width="12" height="12" fill="#fff"/><rect x="14" y="36" width="12" height="12" fill="#151515"/><rect x="26" y="0" width="12" height="12" fill="#151515"/><rect x="26" y="12" width="12" height="12" fill="#fff"/><rect x="26" y="24" width="12" height="12" fill="#151515"/><rect x="26" y="36" width="12" height="12" fill="#fff"/><rect x="38" y="0" width="12" height="12" fill="#fff"/><rect x="38" y="12" width="12" height="12" fill="#151515"/><rect x="38" y="24" width="12" height="12" fill="#fff"/><rect x="38" y="36" width="12" height="12" fill="#151515"/><rect x="50" y="0" width="12" height="12" fill="#151515"/><rect x="50" y="12" width="12" height="12" fill="#fff"/><rect x="50" y="24" width="12" height="12" fill="#151515"/><rect x="50" y="36" width="12" height="12" fill="#fff"/></g></svg><h1>Tu equipo,<br><span>tu camiseta</span></h1><p>Elige modelo, equipo, equipación y talla. Al terminar, tu pedido se prepara en un mensaje de WhatsApp para enviármelo.</p><div class="deportes"><span>Fútbol</span><span>NBA</span><span>Fórmula 1</span></div><span class="aviso">Entrega en '+esc(AJ.plazo)+'</span></section>';
+  grupos(DATA.productos).forEach(function(g){
+    h+='<section class="grupo"><h2>'+esc(g)+'</h2>';
+    DATA.productos.filter(function(p){return p.grupo===g;}).forEach(function(p){
+      h+='<article class="prod"><div class="prod-txt"><h3>'+esc(p.nombre)+'</h3>'+(p.desc?'<p>'+esc(p.desc)+'</p>':'')+'</div><span class="precio">'+eur(p.precio)+'</span><button class="btn btn-add" data-act="abrir" data-id="'+esc(p.id)+'">Añadir</button></article>';
+    });
+    h+='</section>';
+  });
+  h+='<div class="info"><span><b>Personalización:</b> nombre y dorsal por '+eur(precioDorsal())+' extra. El parche es gratis.</span><span><b>¿Dudas?</b> Escríbeme al WhatsApp <b>'+esc(telBonito(AJ.whatsapp))+'</b>.</span></div>';
+  if(st.carrito.length)h+='<div class="barra"><button class="btn btn-pri" data-act="carrito"><span>Ver pedido · '+nArt()+(nArt()===1?' prenda':' prendas')+'</span><span>'+eur(total())+'</span></button></div>';
+  if(st.sheet)h+=vSheet();
+  return h;
+}
+function vSheet(){
+  var s=st.sheet,p=prod(s.pid);if(!p)return '';
+  var ph=p.id==='c5'?'Ej: Lakers, Ferrari 2025, Barça 1999':'Ej: Real Madrid 25/26';
+  var h='<div class="velo" data-act="cerrar"></div><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t">';
+  h+='<header><h2 id="sh-t">'+esc(p.nombre)+'</h2><span class="precio">'+eur(p.precio)+'</span><button class="x" data-act="cerrar" aria-label="Cerrar">×</button></header>';
+  h+=vElegirEquipo(s,ph);
+  h+='<div class="campo"><span class="lbl">Talla</span><div class="chips">'+(TALLAS[p.tallas]||TALLAS.adulto).map(function(t){return '<button data-act="talla" data-v="'+esc(t)+'" aria-pressed="'+(s.talla===t)+'">'+esc(t)+'</button>';}).join('')+'</div></div>';
+  h+='<label class="tog" for="f-pers"><input type="checkbox" id="f-pers" data-s="pers"'+(s.pers?' checked':'')+'> Nombre y dorsal personalizado <small>+'+eur(precioDorsal())+'</small></label>';
+  if(s.pers)h+='<div class="pers"><div class="campo"><label for="f-pnombre">Nombre</label><input type="text" id="f-pnombre" data-s="pnombre" value="'+esc(s.pnombre)+'" placeholder="Ej: PEDRI" maxlength="14" autocomplete="off" style="text-transform:uppercase"></div><div class="campo"><label for="f-pnum">Dorsal</label><input type="text" id="f-pnum" data-s="pnum" value="'+esc(s.pnum)+'" placeholder="8" maxlength="2" inputmode="numeric"></div></div>';
+  h+='<div class="campo"><label for="f-pparche">Parche <span class="gratis">GRATIS</span></label><select id="f-pparche" data-s="pparche">'+PARCHES.map(function(x){return '<option'+(s.pparche===x?' selected':'')+'>'+x+'</option>';}).join('')+'</select></div>';
+  h+='<div class="campo"><span class="lbl">Cantidad</span><div class="stepper"><button data-act="menos" aria-label="Una menos">−</button><output>'+s.cant+'</output><button data-act="mas" aria-label="Una más">+</button></div></div>';
+  if(s.err)h+='<p class="err" role="alert">'+esc(s.err)+'</p>';
+  var u=(+p.precio)+(s.pers?precioDorsal():0);
+  h+='<button class="btn btn-pri" data-act="anadir">Añadir al pedido · '+eur(u*s.cant)+'</button></section>';
+  return h;
+}
+function vElegirEquipo(s,ph){
+  var h='<div class="campo"><span class="lbl">Equipo</span><div class="seg2">'+TIPOS.map(function(x){return '<button data-act="tipo" data-v="'+x[0]+'" aria-pressed="'+(!s.otro&&s.tipo===x[0])+'">'+x[1]+'</button>';}).join('')+'<button data-act="otro-equipo" aria-pressed="'+s.otro+'">Otro equipo</button></div>';
+  if(s.otro){h+='<input type="text" id="f-equipo" data-s="equipo" value="'+esc(s.equipo)+'" placeholder="'+esc(ph)+'" autocomplete="off" aria-label="Escribe el equipo">';}
+  else{
+    var ls=ligasDe(s.tipo);
+    if(ls.length>1)h+='<div class="chips ligas">'+ls.map(function(l){return '<button data-act="liga" data-v="'+esc(l.id)+'" aria-pressed="'+(s.liga===l.id)+'">'+esc(l.nombre)+'</button>';}).join('')+'</div>';
+    var eqs=DATA.equipos.filter(function(t){return t.liga===s.liga;});
+    h+=eqs.length?'<div class="equipos">'+eqs.map(function(t){return '<button class="eq" data-act="equipo" data-id="'+esc(t.id)+'" aria-pressed="'+(s.eid===t.id)+'"><img src="'+esc(imgKit(t,'1',true))+'" alt=""><span>'+esc(t.nombre)+'</span></button>';}).join('')+'</div>':'<p class="kit-l">Aún no hay equipos en esta liga. Usa "Otro equipo".</p>';
+  }
+  h+='</div>';
+  var eq=s.otro?null:equipo(s.eid);
+  if(eq||s.otro){
+    h+='<div class="campo"><span class="lbl">Equipación'+(eq?' · '+esc(eq.nombre):'')+'</span><div class="kits">'+KITS.map(function(k){return '<button class="kit" data-act="kit" data-v="'+k[0]+'" aria-pressed="'+(s.kit===k[0])+'"><img src="'+esc(imgKit(eq,k[0],true))+'" alt="'+esc((eq?eq.nombre+' ':'')+k[1])+'"><span>'+k[1]+'</span></button>';}).join('')+'</div>';
+    if(s.kit){var real=eq&&eq.kits&&eq.kits[s.kit];h+='<img class="kit-grande" src="'+esc(imgKit(eq,s.kit,false))+'" alt="'+esc((eq?eq.nombre+' ':'')+kitTxt(s.kit)+' equipación')+'">'+(real?'':'<span class="kit-l" style="text-align:center">Imagen orientativa con los colores de la temporada '+esc(AJ.temporada||'')+'. Tu camiseta llevará el escudo y los detalles oficiales.</span>');}
+    h+='</div>';
+  }
+  return h;
+}
+function vEquipos(){
+  if(!st.cat)st.cat=JSON.parse(JSON.stringify(DATA));
+  var C=st.cat;if(!Array.isArray(C.equipos))C.equipos=[];if(!Array.isArray(C.ligas))C.ligas=[];
+  if(!st.gliga||!C.ligas.some(function(l){return l.id===st.gliga;}))st.gliga=C.ligas.length?C.ligas[0].id:'';
+  var h='<p style="margin:0 0 10px;color:var(--muted);font-size:14px">Elige una liga para ver sus equipos. Ajusta el diseño y los colores de cada equipación o sube una foto real, que sustituye al dibujo. Los cambios se ven en la tienda al pulsar Publicar.</p>';
+  h+='<div class="campo"><label for="g-liga">Liga</label><select id="g-liga" data-gliga="1">'+TIPOS.map(function(tp){var ls=C.ligas.filter(function(l){return l.tipo===tp[0];});return ls.length?'<optgroup label="'+tp[1]+'">'+ls.map(function(l){var n=C.equipos.filter(function(t){return t.liga===l.id;}).length;return '<option value="'+esc(l.id)+'"'+(l.id===st.gliga?' selected':'')+'>'+esc(l.nombre)+' ('+n+')</option>';}).join('')+'</optgroup>':'';}).join('')+'</select></div>';
+  if(!st.assets)h+='<p class="err">La subida de fotos no está disponible en esta vista.</p>';
+  var lista=[];C.equipos.forEach(function(t,i){if(t.liga===st.gliga)lista.push(i);});
+  if(!lista.length)h+='<div class="vacio" style="margin-top:10px">Esta liga no tiene equipos. Añade el primero abajo.</div>';
+  h+='<div class="lista">';
+  lista.forEach(function(i){
+    var t=C.equipos[i];if(!t.col)t.col={};if(!t.kits)t.kits={};
+    h+='<div class="caja"><div class="eq-cab"><div class="campo"><label for="e-n-'+esc(t.id)+'">Equipo</label><input type="text" id="e-n-'+esc(t.id)+'" data-e="'+i+'" value="'+esc(t.nombre)+'" placeholder="Nombre del equipo"></div><div class="campo"><label for="e-l-'+esc(t.id)+'">Liga</label><select id="e-l-'+esc(t.id)+'" data-eliga="'+i+'">'+C.ligas.map(function(l){return '<option value="'+esc(l.id)+'"'+(l.id===t.liga?' selected':'')+'>'+esc(l.nombre)+'</option>';}).join('')+'</select></div></div><div class="kits">';
+    KITS.forEach(function(k){
+      var sp=t.col[k[0]]||DEF_COL[k[0]].slice(),id=t.kits[k[0]],key=t.id+':'+k[0],sub=st.subiendo[key],ik=i+':'+k[0];
+      h+='<div class="kit-slot"><img src="'+esc(id?foto(id):camiseta(sp,k[0],true))+'" alt="'+esc(k[1])+'"><span class="kit-l">'+k[1]+(id?' · foto':'')+'</span>';
+      h+='<select id="pat-'+esc(key)+'" data-pat="'+ik+'" aria-label="Diseño '+k[1]+'">'+PATRONES.map(function(pp){return '<option value="'+pp[0]+'"'+(sp[0]===pp[0]?' selected':'')+'>'+pp[1]+'</option>';}).join('')+'</select>';
+      h+='<div class="colores">'+[1,2,3].map(function(n){return '<input type="color" id="col-'+esc(key)+'-'+n+'" data-col="'+ik+':'+n+'" value="'+esc(sp[n]||'#ffffff')+'" aria-label="'+(['','Color principal','Color secundario','Detalles'][n])+'">';}).join('')+'</div>';
+      if(st.assets)h+=sub?'<span class="kit-l">Subiendo…</span>':'<label class="btn btn-sm" for="up-'+esc(key)+'">'+(id?'Cambiar foto':'Subir foto')+'</label><input type="file" accept="image/*" id="up-'+esc(key)+'" data-foto="'+ik+'" hidden>'+(id?'<button class="btn btn-sm btn-peligro" data-act="quitar-foto" data-v="'+ik+'">Quitar foto</button>':'');
+      h+='</div>';
+    });
+    h+='</div>'+(st.catBorrar===t.id?'<button class="btn btn-sm btn-peligro" data-act="eq-borrar-si" data-i="'+i+'" style="justify-self:start">Confirmar: quitar equipo</button>':'<button class="btn btn-sm btn-peligro" data-act="cat-borrar" data-id="'+esc(t.id)+'" style="justify-self:start">Quitar equipo</button>')+'</div>';
+  });
+  h+='</div><div style="display:grid;gap:10px;margin-top:12px"><button class="btn" data-act="eq-nuevo">+ Añadir equipo a esta liga</button>';
+  h+='<div class="caja"><b>Añadir una liga</b><div class="eq-cab"><div class="campo"><label for="g-nliga">Nombre</label><input type="text" id="g-nliga" data-g="nliga" value="'+esc(st.nliga||'')+'" placeholder="Ej: Eredivisie"></div><div class="campo"><label for="g-ntipo">Apartado</label><select id="g-ntipo" data-ntipo="1">'+TIPOS.map(function(tp){return '<option value="'+tp[0]+'"'+((st.ntipo||'europa')===tp[0]?' selected':'')+'>'+tp[1]+'</option>';}).join('')+'</select></div></div><button class="btn btn-sm" data-act="liga-nueva" style="justify-self:start">Añadir liga</button></div>';
+  if(st.fotoMsg)h+='<p class="err" role="alert">'+esc(st.fotoMsg)+'</p>';
+  if(st.catMsg)h+='<p class="err" role="alert">'+esc(st.catMsg)+'</p>';
+  h+='<button class="btn btn-pri" data-act="publicar"'+(st.pub?' disabled':'')+'>'+(st.pub?'Publicando…':'Publicar cambios en la tienda')+'</button></div>';
+  return h;
+}
+function comprimir(file){
+  return new Promise(function(ok,ko){
+    var url=URL.createObjectURL(file),img=new Image();
+    img.onload=function(){var m=1100,w=img.naturalWidth,hh=img.naturalHeight,r=Math.min(1,m/Math.max(w,hh));var c=document.createElement('canvas');c.width=Math.round(w*r);c.height=Math.round(hh*r);var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(function(b){b?ok(b):ko();},'image/jpeg',0.85);};
+    img.onerror=function(){URL.revokeObjectURL(url);ko();};
+    img.src=url;
+  });
+}
+function subirFoto(input){
+  var f=input.files&&input.files[0];if(!f||!st.assets)return;
+  var pr=input.dataset.foto.split(':'),t=st.cat.equipos[+pr[0]],k=pr[1],key=t.id+':'+k;
+  st.subiendo[key]=true;st.fotoMsg='';render();
+  comprimir(f).then(function(b){return st.assets.upload(b,{type:'image/jpeg'});}).then(function(r){t.kits[k]=r.id;delete st.subiendo[key];render();},function(err){
+    delete st.subiendo[key];
+    var c=err&&err.code;
+    st.fotoMsg=c==='too_large'?'La foto es demasiado grande. Prueba con otra.':c==='quota_or_state'?'No queda espacio para más fotos.':c==='rate_limited'?'Vas muy rápido. Espera unos segundos y vuelve a intentarlo.':!c?'No se pudo leer esa imagen. Prueba con una foto JPG o PNG.':'No se pudo subir la foto. Inténtalo de nuevo.';
+    render();
+  });
+}
+function vCarrito(){
+  var h=cabecera()+'<button class="volver" data-act="vista" data-v="tienda">← Seguir comprando</button><h1 class="titulo">Tu pedido</h1>';
+  if(!st.carrito.length)return h+'<div class="vacio" style="margin-top:16px">Todavía no has añadido nada.</div>';
+  h+='<div class="lineas">';
+  st.carrito.forEach(function(it,i){
+    var det=[it.equipo+(it.kit?' '+kitTxt(it.kit)+' equipación':''),'Talla '+it.talla];if(it.dorsal)det.push('nombre y dorsal: '+it.dorsal);if(it.parche)det.push('parche '+it.parche+' (gratis)');
+    h+='<div class="linea"><b>'+it.cant+'× '+esc(it.nombre)+'</b><span class="imp">'+eur(unidad(it)*it.cant)+'</span><span class="det">'+esc(det.join(' · '))+'</span><button class="quitar" data-act="quitar" data-i="'+i+'">Quitar</button></div>';
+  });
+  h+='</div><div class="total"><span>Total</span><strong>'+eur(total())+'</strong></div>';
+  h+='<div class="form"><div class="campo"><label for="f-cliente">Tu nombre</label><input type="text" id="f-cliente" data-c="cliente" value="'+esc(st.cliente)+'" placeholder="Nombre y apellido" autocomplete="name"></div>';
+  h+='<div class="campo"><label for="f-notas">Notas (opcional)</label><textarea id="f-notas" data-c="notas" placeholder="Dirección de entrega, dudas de talla…">'+esc(st.notas)+'</textarea></div>';
+  h+='<p class="err" id="err-carrito" role="alert"'+(st.errCarrito?'':' hidden')+'>'+esc(st.errCarrito)+'</p>';
+  h+='<a class="btn btn-pri btn-wa" id="enviar" data-act="enviar" href="'+esc(waHref())+'" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>';
+  h+='<p style="margin:0;color:var(--muted);font-size:13px">Se abrirá WhatsApp con tu pedido escrito. Solo tienes que pulsar enviar. Entrega en '+esc(AJ.plazo)+'.</p></div>';
+  return h;
+}
+function vEnviado(){
+  var h=cabecera()+'<div style="display:grid;gap:14px;margin-top:20px"><h1 class="titulo">Pedido preparado</h1>';
+  h+='<p class="enviado-txt" style="margin:0">Pulsa <b>enviar</b> en WhatsApp para que me llegue. Tu código es <span class="codigo">'+esc(st.codigo)+'</span>.</p>';
+  h+='<div class="caja"><b>¿No se abrió WhatsApp?</b><span>Copia este mensaje y envíalo al <b>'+esc(telBonito(AJ.whatsapp))+'</b>.</span><pre class="msg" id="msg-txt">'+esc(texto())+'</pre><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-act="copiar">'+(st.copiado||'Copiar pedido')+'</button><a class="btn btn-wa" href="'+esc(waHref())+'" target="_blank" rel="noopener">Abrir WhatsApp otra vez</a></div></div>';
+  h+='<button class="btn btn-pri" data-act="otro">Hacer otro pedido</button></div>';
+  return h;
+}
+
+/* ---------- gestión ---------- */
+function vGestion(){
+  var h=cabecera()+'<div class="tabs" role="group"><button data-act="gtab" data-v="pedidos" aria-pressed="'+(st.gtab==='pedidos')+'">Pedidos</button><button data-act="gtab" data-v="catalogo" aria-pressed="'+(st.gtab==='catalogo')+'">Catálogo y precios</button><button data-act="gtab" data-v="equipos" aria-pressed="'+(st.gtab==='equipos')+'">Equipos y fotos</button><button data-act="gtab" data-v="qr" aria-pressed="'+(st.gtab==='qr')+'">Web y QR</button></div>';
+  return h+(st.gtab==='pedidos'?vPedidos():st.gtab==='qr'?vQR():st.gtab==='equipos'?vEquipos():vCatalogo());
+}
+function vPedidos(){
+  var h='';
+  if(!st.db)return h+'<div class="vacio">El registro de pedidos no está disponible en esta vista. Ábrela desde tu cuenta de Claude.</div>';
+  var P=st.pedidos||[];
+  var activos=P.filter(function(p){return p.estado!=='Cancelado';});
+  var nuevos=P.filter(function(p){return p.estado==='Nuevo';}).length;
+  var pend=activos.filter(function(p){return p.estado!=='Entregado';}).length;
+  var cobrar=activos.filter(function(p){return !p.pagado;}).reduce(function(a,p){return a+(+p.total||0);},0);
+  h+='<div class="resumen"><div class="stat"><small>Nuevos</small><b>'+nuevos+'</b></div><div class="stat"><small>Sin entregar</small><b>'+pend+'</b></div><div class="stat"><small>Por cobrar</small><b>'+eur(cobrar)+'</b></div></div>';
+  h+='<div class="caja" style="margin-top:14px"><label for="f-pegar">Registrar un pedido de WhatsApp</label><span style="font-size:13px;color:var(--muted)">Mantén pulsado el mensaje del cliente en WhatsApp → Copiar, y pégalo aquí.</span><textarea id="f-pegar" data-g="pegar" placeholder="*Nuevo pedido BRY-…*">'+esc(st.pegar)+'</textarea>';
+  if(st.msg)h+='<p class="'+(st.msgOk?'ok':'err')+'" role="status">'+esc(st.msg)+'</p>';
+  h+='<button class="btn btn-add" data-act="registrar" style="justify-self:start">Guardar pedido</button></div>';
+  var f=['Todos'].concat(ESTADOS);
+  h+='<div class="filtros">'+f.map(function(e){var n=e==='Todos'?P.length:P.filter(function(p){return p.estado===e;}).length;return '<button data-act="filtro" data-v="'+esc(e)+'" aria-pressed="'+(st.filtro===e)+'">'+esc(e)+' · '+n+'</button>';}).join('')+'</div>';
+  if(st.dbErr)return h+'<p class="err">'+esc(st.dbErr)+'</p>';
+  if(st.pedidos===null)return h+'<div class="vacio">Cargando pedidos…</div>';
+  var L=P.filter(function(p){return st.filtro==='Todos'||p.estado===st.filtro;});
+  if(!L.length)return h+'<div class="vacio">'+(P.length?'No hay pedidos con este estado.':'Aún no hay pedidos. Cuando te llegue uno por WhatsApp, cópialo y pégalo arriba.')+'</div>';
+  h+='<div class="lista">';
+  L.forEach(function(p){
+    var d=p.fecha?new Date(p.fecha):null;
+    var fecha=d?d.toLocaleDateString('es-ES',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}):'';
+    h+='<article class="ped"><div class="ped-h"><span class="codigo">'+esc(p.codigo||p.id)+'</span><span class="pill e-'+esc(String(p.estado||'').split(' ')[0])+'">'+esc(p.estado)+'</span><span class="pill '+(p.pagado?'pagado':'porcobrar')+'">'+(p.pagado?'Pagado':'Sin pagar')+'</span><span class="fecha">'+esc(fecha)+'</span></div>';
+    h+='<div class="cli">'+esc(p.cliente||'Sin nombre')+'</div>'+(p.notas?'<div class="notas">'+esc(p.notas)+'</div>':'');
+    h+='<ul>'+(p.items||[]).map(function(it){var x=[it.equipo,it.equipacion&&(it.equipacion+' equipación'),it.talla&&('Talla '+it.talla)];if(it.parches)x.push('parches');if(it.dorsal)x.push(it.dorsal);if(it.parche)x.push('parche '+it.parche);return '<li>'+it.cant+'× '+esc(it.producto)+' — '+esc(x.filter(Boolean).join(' · '))+' — '+eur(it.importe)+'</li>';}).join('')+'</ul>';
+    h+='<div class="campo"><label for="nota-'+esc(p.id)+'">Nota interna</label><input type="text" id="nota-'+esc(p.id)+'" data-nota="'+esc(p.id)+'" value="'+esc(p.nota_interna||'')+'" placeholder="Proveedor, seguimiento, dirección…"></div>';
+    h+='<div class="ped-f"><span class="tot">'+eur(p.total)+'</span><select id="estado-'+esc(p.id)+'" data-estado="'+esc(p.id)+'" aria-label="Estado">'+ESTADOS.map(function(e){return '<option'+(e===p.estado?' selected':'')+'>'+e+'</option>';}).join('')+'</select><label><input type="checkbox" id="pag-'+esc(p.id)+'" data-pagado="'+esc(p.id)+'"'+(p.pagado?' checked':'')+'> Pagado</label>';
+    h+=(st.borrar===p.id?'<button class="btn btn-sm btn-peligro" data-act="borrar-si" data-id="'+esc(p.id)+'">Confirmar borrado</button><button class="btn btn-sm" data-act="borrar-no">No</button>':'<button class="btn btn-sm btn-peligro" data-act="borrar" data-id="'+esc(p.id)+'">Borrar</button>')+'</div></article>';
+  });
+  return h+'</div>';
+}
+function vQR(){
+  var web=limpio(AJ.web);
+  var h='<div class="caja"><b>1. Tienda para clientes</b><span style="font-size:14px;color:var(--muted)">Tus clientes no pueden abrir la tienda dentro de Claude sin cuenta. Descarga este archivo y súbelo a tu web gratuita (GitHub Pages). Vuelve a descargarlo y subirlo cada vez que publiques cambios de precios o equipos.</span>';
+  h+=st.dl?'<button class="btn btn-add" data-act="exportar"'+(st.exp?' disabled':'')+' style="justify-self:start">'+(st.exp?'Preparando…':'Descargar tienda (index.html)')+'</button>':'<p class="err">La descarga no está disponible en esta vista.</p>';
+  if(st.expMsg)h+='<p class="'+(st.expOk?'ok':'err')+'">'+esc(st.expMsg)+'</p>';
+  h+='</div>';
+  if(web){
+    h+='<div class="caja qrcaja" style="margin-top:12px"><b>2. QR de tu tienda pública</b><a href="'+esc(web)+'" target="_blank" rel="noopener" class="qrlink" aria-label="Abrir la tienda"><img id="qr-web" alt="QR de la tienda" src="'+QR_IMG+'" style="opacity:.15"></a><span class="codigo" style="overflow-wrap:anywhere">'+esc(web)+'</span><button class="btn btn-add" data-act="copiar-web">'+(st.urlCopiado?'Enlace copiado':'Copiar enlace')+'</button><span style="font-size:13px;color:var(--muted)">Haz una captura de este QR para imprimirlo o compartirlo.</span></div>';
+    setTimeout(pintarQR,0);
+    return h;
+  }
+  h+='<div class="caja" style="margin-top:12px"><b>2. QR de tu tienda pública</b><span style="font-size:14px;color:var(--muted)">Cuando tengas la dirección de tu web, escríbela en Catálogo y precios → Dirección de tu tienda pública y publica. Aquí aparecerá su QR.</span></div>';
+  h+='<p style="margin:16px 0 6px;font-weight:700">QR antiguo (solo para gente con cuenta de Claude)</p>';
+  h+='<div class="caja qrcaja"><a href="'+TIENDA_URL+'" target="_blank" rel="noopener" class="qrlink" aria-label="Abrir la tienda"><img src="'+QR_IMG+'" alt="QR de la tienda"></a><b>Escanéalo o tócalo para abrir la tienda</b>';
+  h+='<div class="campo" style="width:100%"><label for="f-url">Enlace de la tienda</label><input type="text" id="f-url" readonly value="'+TIENDA_URL+'"></div>';
+  h+='<button class="btn btn-add" data-act="copiar-url">'+(st.urlCopiado?'Enlace copiado':'Copiar enlace')+'</button>';
+  h+='<span style="font-size:13px;color:var(--muted)">Al compartir el QR por WhatsApp o redes, pega también este enlace: así quien lo vea en su propio móvil puede tocarlo sin escanear.</span></div>';
+  return h;
+}
+function vCatalogo(){
+  if(!st.cat)st.cat=JSON.parse(JSON.stringify(DATA));
+  var C=st.cat,h='';
+  h+='<div class="caja"><b>Ajustes de la tienda</b><div class="ajustes"><div class="campo"><label for="a-tienda">Nombre de la tienda</label><input type="text" id="a-tienda" data-a="tienda" value="'+esc(C.ajustes.tienda)+'"></div><div class="campo"><label for="a-wa">WhatsApp (con prefijo 34)</label><input type="text" id="a-wa" data-a="whatsapp" value="'+esc(C.ajustes.whatsapp)+'" inputmode="tel"></div><div class="campo"><label for="a-dor">Precio nombre y dorsal (€)</label><input type="number" id="a-dor" data-a="dorsal" value="'+esc(C.ajustes.dorsal==null?3:C.ajustes.dorsal)+'" min="0" step="0.5"></div><div class="campo ancho"><label for="a-web">Dirección de tu tienda pública</label><input type="text" id="a-web" data-a="web" value="'+esc(C.ajustes.web||'')+'" placeholder="https://tuusuario.github.io/tienda" inputmode="url"></div><div class="campo"><label for="a-plazo">Plazo de entrega</label><input type="text" id="a-plazo" data-a="plazo" value="'+esc(C.ajustes.plazo)+'"></div></div></div>';
+  h+='<datalist id="dl-grupos">'+grupos(C.productos).map(function(g){return '<option value="'+esc(g)+'">';}).join('')+'</datalist>';
+  h+='<div class="lista">';
+  C.productos.forEach(function(p,i){
+    h+='<div class="cat-fila"><div class="campo"><label for="p-n-'+esc(p.id)+'">Producto</label><input type="text" id="p-n-'+esc(p.id)+'" data-p="'+i+'" data-k="nombre" value="'+esc(p.nombre)+'"></div><div class="campo"><label for="p-p-'+esc(p.id)+'">Precio €</label><input type="number" id="p-p-'+esc(p.id)+'" data-p="'+i+'" data-k="precio" value="'+esc(p.precio)+'" min="0" step="0.5"></div>';
+    h+='<div class="campo ancho"><label for="p-d-'+esc(p.id)+'">Descripción</label><input type="text" id="p-d-'+esc(p.id)+'" data-p="'+i+'" data-k="desc" value="'+esc(p.desc||'')+'"></div>';
+    h+='<div class="fila2"><div class="campo"><label for="p-g-'+esc(p.id)+'">Sección</label><input type="text" list="dl-grupos" id="p-g-'+esc(p.id)+'" data-p="'+i+'" data-k="grupo" value="'+esc(p.grupo)+'"></div><div class="campo"><label for="p-t-'+esc(p.id)+'">Tallas</label><select id="p-t-'+esc(p.id)+'" data-p="'+i+'" data-k="tallas">'+Object.keys(TALLAS_TXT).map(function(k){return '<option value="'+k+'"'+(p.tallas===k?' selected':'')+'>'+TALLAS_TXT[k]+'</option>';}).join('')+'</select></div>';
+    h+=(st.catBorrar===p.id?'<button class="btn btn-sm btn-peligro" data-act="cat-borrar-si" data-i="'+i+'">Confirmar</button>':'<button class="btn btn-sm btn-peligro" data-act="cat-borrar" data-id="'+esc(p.id)+'">Quitar</button>')+'</div></div>';
+  });
+  h+='</div><div style="display:grid;gap:10px;margin-top:12px"><button class="btn" data-act="cat-nuevo">+ Añadir producto</button>';
+  if(st.catMsg)h+='<p class="err" role="alert">'+esc(st.catMsg)+'</p>';
+  h+='<button class="btn btn-pri" data-act="publicar"'+(st.pub?' disabled':'')+'>'+(st.pub?'Publicando…':'Publicar cambios en la tienda')+'</button><span style="font-size:13px;color:var(--muted)">Los cambios se ven en la tienda en cuanto publicas. El QR no cambia.</span></div>';
+  return h;
+}
+
+function render(){
+  var y=window.scrollY;
+  try{document.body.classList.toggle('cesped',!(st.vista==='gestion'&&st.owner));}catch(e){}
+  document.body.classList.toggle('cesped-on',!(st.vista==='gestion'&&st.owner)&&st.vista!=='carrito'&&st.vista!=='enviado');
+  $app.innerHTML=st.vista==='gestion'&&st.owner?vGestion():st.vista==='carrito'?vCarrito():st.vista==='enviado'?vEnviado():vTienda();
+  window.scrollTo(0,y);
+}
+
+/* ---------- acciones ---------- */
+$app.addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]');if(!b)return;
+  var a=b.getAttribute('data-act'),v=b.getAttribute('data-v');
+  if(a==='vista'){st.vista=v;if(v==='gestion'&&st.gtab==='catalogo'&&!st.cat)st.cat=null;window.scrollTo(0,0);render();return;}
+  if(a==='abrir'){var l0=ligasDe('europa')[0];st.sheet={pid:b.getAttribute('data-id'),tipo:'europa',liga:l0?l0.id:'',eid:'',otro:!DATA.equipos.length,equipo:'',kit:'',talla:'',pers:false,pnombre:'',pnum:'',pparche:'Sin parche',cant:1,err:''};render();return;}
+  if(a==='equipo'){st.sheet.eid=b.getAttribute('data-id');st.sheet.otro=false;st.sheet.kit=st.sheet.kit||'1';st.sheet.err='';render();return;}
+  if(a==='otro-equipo'){st.sheet.eid='';st.sheet.otro=true;st.sheet.err='';render();var oe=document.getElementById('f-equipo');if(oe)oe.focus();return;}
+  if(a==='tipo'){var lt=ligasDe(v)[0];st.sheet.tipo=v;st.sheet.otro=false;st.sheet.liga=lt?lt.id:'';st.sheet.eid='';st.sheet.kit='';st.sheet.err='';render();return;}
+  if(a==='liga'){st.sheet.liga=v;st.sheet.eid='';st.sheet.kit='';render();return;}
+  if(a==='kit'){st.sheet.kit=v;st.sheet.err='';render();return;}
+  if(a==='cerrar'){st.sheet=null;render();return;}
+  if(a==='talla'){st.sheet.talla=v;st.sheet.err='';render();return;}
+  if(a==='menos'){st.sheet.cant=Math.max(1,st.sheet.cant-1);render();return;}
+  if(a==='mas'){st.sheet.cant=Math.min(20,st.sheet.cant+1);render();return;}
+  if(a==='anadir'){
+    var s=st.sheet,p=prod(s.pid);
+    var eq=s.otro?null:equipo(s.eid);var eqNombre=eq?eq.nombre:limpio(s.equipo);
+    if(!eqNombre){s.err=s.otro?'Escribe el equipo que quieres.':'Elige un equipo.';render();return;}
+    if(!s.kit){s.err='Elige la equipación: 1ª, 2ª o 3ª.';render();return;}
+    if(!s.talla){s.err='Elige una talla.';render();return;}
+    var dor=s.pers?limpio(String(s.pnombre).toUpperCase()+' '+String(s.pnum).replace(/\D/g,'')):'';
+    if(s.pers&&!dor){s.err='Escribe el nombre o el dorsal, o desmarca la personalización.';render();return;}
+    st.carrito.push({pid:p.id,nombre:p.nombre,precio:+p.precio,equipo:limpio(eqNombre),kit:s.kit,foto:eq&&eq.kits?eq.kits[s.kit]||'':'',talla:s.talla,dorsal:dor,parche:s.pparche&&s.pparche!=='Sin parche'?s.pparche:'',cant:s.cant});
+    st.sheet=null;guardarLocal();render();return;
+  }
+  if(a==='carrito'){st.vista='carrito';st.errCarrito='';window.scrollTo(0,0);render();return;}
+  if(a==='quitar'){st.carrito.splice(+b.getAttribute('data-i'),1);guardarLocal();render();return;}
+  if(a==='enviar'){
+    if(!limpio(st.cliente)){e.preventDefault();st.errCarrito='Escribe tu nombre para que sepa de quién es el pedido.';var er=document.getElementById('err-carrito');er.textContent=st.errCarrito;er.hidden=false;document.getElementById('f-cliente').focus();return;}
+    b.href=waHref();
+    setTimeout(function(){st.vista='enviado';window.scrollTo(0,0);render();},400);return;
+  }
+  if(a==='copiar'){
+    var t=texto();
+    var hecho=function(){st.copiado='Copiado';render();};
+    try{navigator.clipboard.writeText(t).then(hecho,function(){seleccionar();});}catch(x){seleccionar();}
+    return;
+  }
+  if(a==='copiar-url'){var ok=function(){st.urlCopiado=true;render();};var sel=function(){var i=document.getElementById('f-url');if(i){i.focus();i.select();}};try{navigator.clipboard.writeText(TIENDA_URL).then(ok,sel);}catch(x){sel();}return;}
+  if(a==='copiar-web'){var w=limpio(AJ.web);try{navigator.clipboard.writeText(w).then(function(){st.urlCopiado=true;render();},function(){});}catch(x){}return;}
+  if(a==='exportar'){exportar();return;}
+  if(a==='otro'){st.carrito=[];st.notas='';st.codigo=nuevoCodigo();st.copiado='';st.vista='tienda';guardarLocal();window.scrollTo(0,0);render();return;}
+  /* gestión */
+  if(a==='gtab'){st.gtab=v;render();return;}
+  if(a==='filtro'){st.filtro=v;render();return;}
+  if(a==='registrar'){registrar();return;}
+  if(a==='borrar'){st.borrar=b.getAttribute('data-id');render();return;}
+  if(a==='borrar-no'){st.borrar=null;render();return;}
+  if(a==='borrar-si'){var id=b.getAttribute('data-id');st.borrar=null;st.db.doc('pedidos/'+id).delete().catch(function(){st.msg='No se pudo borrar el pedido. Inténtalo de nuevo.';st.msgOk=false;render();});return;}
+  if(a==='cat-nuevo'){st.cat.productos.push({id:'p'+Date.now().toString(36),nombre:'',desc:'',grupo:st.cat.productos.length?st.cat.productos[st.cat.productos.length-1].grupo:'Camisetas',precio:0,tallas:'adulto'});render();var ins=$app.querySelectorAll('.cat-fila');if(ins.length)ins[ins.length-1].querySelector('input').focus();return;}
+  if(a==='cat-borrar'){st.catBorrar=b.getAttribute('data-id');render();return;}
+  if(a==='cat-borrar-si'){st.cat.productos.splice(+b.getAttribute('data-i'),1);st.catBorrar=null;render();return;}
+  if(a==='eq-nuevo'){st.cat.equipos.push({id:'e'+Date.now().toString(36),nombre:'',liga:st.gliga,col:JSON.parse(JSON.stringify(DEF_COL)),kits:{'1':'','2':'','3':''}});render();var es=$app.querySelectorAll('[data-e]');if(es.length)es[es.length-1].focus();return;}
+  if(a==='eq-borrar-si'){st.cat.equipos.splice(+b.getAttribute('data-i'),1);st.catBorrar=null;render();return;}
+  if(a==='quitar-foto'){var q=v.split(':');st.cat.equipos[+q[0]].kits[q[1]]='';render();return;}
+  if(a==='liga-nueva'){var nn=limpio(st.nliga);if(!nn){st.catMsg='Escribe el nombre de la liga.';render();return;}var lid='l'+Date.now().toString(36);st.cat.ligas.push({id:lid,nombre:nn,tipo:st.ntipo||'europa'});st.gliga=lid;st.nliga='';st.catMsg='';render();return;}
+  if(a==='publicar'){publicar();return;}
+});
+function seleccionar(){var el=document.getElementById('msg-txt');if(!el)return;var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);st.copiado='';}
+
+$app.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset.s&&st.sheet&&t.type!=='checkbox'){st.sheet[t.dataset.s]=t.value;return;}
+  if(t.dataset.c){st[t.dataset.c]=t.value;guardarLocal();var en=document.getElementById('enviar');if(en)en.href=waHref();if(t.dataset.c==='cliente'&&limpio(t.value)){var er=document.getElementById('err-carrito');if(er)er.hidden=true;st.errCarrito='';}return;}
+  if(t.dataset.g){st[t.dataset.g]=t.value;return;}
+  if(t.dataset.col)return;
+  if(t.dataset.e!=null){st.cat.equipos[+t.dataset.e].nombre=t.value;return;}
+  if(t.dataset.a){st.cat.ajustes[t.dataset.a]=(t.dataset.a==='parches'||t.dataset.a==='dorsal')?(+t.value||0):t.value;return;}
+  if(t.dataset.p!=null&&t.dataset.k&&t.tagName!=='SELECT'){var p=st.cat.productos[+t.dataset.p];p[t.dataset.k]=t.dataset.k==='precio'?(+t.value||0):t.value;return;}
+});
+$app.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset.s==='pers'&&st.sheet){st.sheet[t.dataset.s]=t.checked;render();if(t.dataset.s==='pers'&&t.checked){var pn=document.getElementById('f-pnombre');if(pn)pn.focus();}return;}
+  if(t.dataset.p!=null&&t.dataset.k==='tallas'){st.cat.productos[+t.dataset.p].tallas=t.value;return;}
+  if(t.dataset.foto){subirFoto(t);return;}
+  if(t.dataset.gliga){st.gliga=t.value;render();return;}
+  if(t.dataset.ntipo){st.ntipo=t.value;return;}
+  if(t.dataset.eliga!=null){st.cat.equipos[+t.dataset.eliga].liga=t.value;render();return;}
+  if(t.dataset.pat){var pa=t.dataset.pat.split(':'),te=st.cat.equipos[+pa[0]];if(!te.col)te.col={};if(!te.col[pa[1]])te.col[pa[1]]=DEF_COL[pa[1]].slice();te.col[pa[1]][0]=t.value;render();return;}
+  if(t.dataset.col){var pc=t.dataset.col.split(':'),tc=st.cat.equipos[+pc[0]];if(!tc.col)tc.col={};if(!tc.col[pc[1]])tc.col[pc[1]]=DEF_COL[pc[1]].slice();tc.col[pc[1]][+pc[2]]=t.value;render();return;}
+  if(t.dataset.estado){actualizar(t.dataset.estado,{estado:t.value});return;}
+  if(t.dataset.pagado){actualizar(t.dataset.pagado,{pagado:t.checked});return;}
+  if(t.dataset.nota){actualizar(t.dataset.nota,{nota_interna:t.value});return;}
+});
+
+function actualizar(id,campos){
+  if(!st.db)return;
+  st.db.doc('pedidos/'+id).update(campos).catch(function(){st.msg='No se pudo guardar el cambio en '+id+'. Inténtalo de nuevo.';st.msgOk=false;render();});
+}
+function registrar(){
+  var r=parsear(st.pegar);
+  if(!r){st.msg='No reconozco ese mensaje. Copia el mensaje completo del pedido, desde "Nuevo pedido BRY-…" hasta "Total".';st.msgOk=false;render();return;}
+  var ya=(st.pedidos||[]).some(function(p){return p.id===r.codigo;});
+  if(ya){st.msg='El pedido '+r.codigo+' ya estaba registrado.';st.msgOk=false;render();return;}
+  r.fecha=new Date().toISOString();r.estado='Nuevo';r.pagado=false;r.nota_interna='';
+  st.db.doc('pedidos/'+r.codigo).set(r).then(function(){st.pegar='';st.msg='Pedido '+r.codigo+' de '+(r.cliente||'cliente')+' guardado.';st.msgOk=true;st.filtro='Todos';render();},function(err){st.msg=err&&err.code==='quota_exceeded'?'El registro está lleno. Borra pedidos antiguos entregados para hacer sitio.':'No se pudo guardar. Inténtalo de nuevo.';st.msgOk=false;render();});
+}
+
+function pintarQR(){
+  var img=document.getElementById('qr-web'),web=limpio(AJ.web);if(!img||!web)return;
+  function hacer(){try{var q=window.qrcode(0,'M');q.addData(web);q.make();img.src=q.createDataURL(8,2);img.style.opacity='1';}catch(e){}}
+  if(window.qrcode)return hacer();
+  if(document.getElementById('qr-lib'))return;
+  var sc=document.createElement('script');sc.id='qr-lib';sc.src='https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js';sc.onload=hacer;document.head.appendChild(sc);
+}
+function aDataURL(id){return fetch(foto(id)).then(function(r){if(!r.ok)throw 0;return r.blob();}).then(function(b){return new Promise(function(ok,ko){var fr=new FileReader();fr.onload=function(){ok(fr.result);};fr.onerror=ko;fr.readAsDataURL(b);});});}
+function exportar(){
+  if(!st.dl)return;
+  st.exp=true;st.expMsg='';render();
+  var d=JSON.parse(JSON.stringify(DATA)),tareas=[],fallos=0;
+  (d.equipos||[]).forEach(function(t){Object.keys(t.kits||{}).forEach(function(k){var id=t.kits[k];if(id&&!/^data:/.test(id))tareas.push(aDataURL(id).then(function(u){t.kits[k]=u;},function(){t.kits[k]='';fallos++;}));});});
+  Promise.all(tareas).then(function(){
+    var json=JSON.stringify(d).replace(/</g,'\\u003c');
+    var html='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Tienda '+esc(d.ajustes.tienda)+'</title><style>'+RESET+'</style>'+FONT_LINK+'<style id="estilos">'+document.getElementById('estilos').textContent+'</style></head><body><div id="app"></div><script type="application/json" id="tienda-datos">'+json+'<\/script><script id="programa">'+document.getElementById('programa').textContent+'<\/script></body></html>';
+    return st.dl.save({filename:'index.html',data:html});
+  }).then(function(){st.exp=false;st.expOk=true;st.expMsg='Archivo descargado. Súbelo a tu web para actualizar la tienda.'+(fallos?' Ojo: '+fallos+' foto(s) no se pudieron incluir.':'');render();},function(err){st.exp=false;st.expOk=false;st.expMsg=err&&err.code==='declined'?'Descarga cancelada.':'No se pudo descargar el archivo. Inténtalo de nuevo.';render();});
+}
+function documento(datos){
+  var json=JSON.stringify(datos).replace(/</g,'\\u003c');
+  var css=document.getElementById('estilos').textContent;
+  var prog=document.getElementById('programa').textContent;
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+RESET+'</style></head><body>'+
+    '<title>Tienda '+esc(datos.ajustes.tienda)+'</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<style id="estilos">'+css+'</style>\n'+FONT_LINK+'\n<div id="app"></div>\n<script type="application/json" id="tienda-datos">'+json+'<\/script>\n<script id="programa">'+prog+'<\/script></body></html>';
+}
+function publicar(){
+  var C=st.cat;
+  var malo=C.productos.filter(function(p){return !limpio(p.nombre)||!(+p.precio>0)||!limpio(p.grupo);});
+  if(malo.length){st.catMsg='Cada producto necesita nombre, sección y un precio mayor que 0.';render();return;}
+  if(!Array.isArray(C.equipos))C.equipos=[];
+  if(!Array.isArray(C.ligas))C.ligas=[];
+  if(C.equipos.some(function(t){return !limpio(t.nombre);})){st.catMsg='Cada equipo necesita un nombre.';render();return;}
+  if(Object.keys(st.subiendo).length){st.catMsg='Espera a que terminen de subirse las fotos.';render();return;}
+  C.equipos.forEach(function(t){t.nombre=limpio(t.nombre);});
+  if(String(C.ajustes.whatsapp).replace(/\D/g,'').length<10){st.catMsg='Revisa el número de WhatsApp: ponlo con el prefijo, por ejemplo 34637137006.';render();return;}
+  if(!st.art){st.catMsg='No se puede publicar desde esta vista.';render();return;}
+  C.productos.forEach(function(p){p.nombre=limpio(p.nombre);p.grupo=limpio(p.grupo);p.desc=limpio(p.desc);p.precio=+p.precio;});
+  C.ajustes.whatsapp=String(C.ajustes.whatsapp).replace(/\D/g,'');
+  C.ajustes.web=limpio(C.ajustes.web||'');
+  st.pub=true;st.catMsg='';render();
+  st.art.publish(documento(C)).catch(function(err){
+    st.pub=false;
+    st.catMsg=err&&err.code==='conflict'?'Se guardó otra versión a la vez; la página se recargará. Revisa y repite tus cambios.':(err&&(err.code==='not_writer'||err.code==='not_granted'))?'Esta vista no puede publicar cambios.':'No se pudo publicar. Inténtalo de nuevo en un momento.';
+    render();
+  });
+}
+
+render();
+
+/* ---------- área de gestión: solo la propietaria ---------- */
+(async function(){
+  if(!window.claude||!window.claude.use)return;
+  try{
+    var user=await window.claude.use('user');
+    if(!user)return;
+    var esOwner=await user.canEdit();
+    if(!esOwner)return;
+    st.owner=true;
+    if(location.hash==='#gestion')st.vista='gestion';
+    render();
+    st.art=await window.claude.use('artifact');
+    st.assets=await window.claude.use('assets');
+    st.dl=await window.claude.use('downloads');
+    st.db=await window.claude.use('db');
+    if(st.db){
+      st.db.collection('pedidos').onSnapshot(function(s){
+        st.pedidos=s.docs.map(function(d){var o=d.data();o.id=d.id;return o;}).sort(function(a,b){return String(b.fecha||'').localeCompare(String(a.fecha||''));});
+        var act=document.activeElement;
+        if(st.vista==='gestion'&&!(act&&act.id==='f-pegar'))render();
+      },function(){st.dbErr='No se pudieron cargar los pedidos. Recarga la página.';render();});
+    }
+    render();
+  }catch(e){}
+})();
+})();
+</script></body></html>
+</body></html>
