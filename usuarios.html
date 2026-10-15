@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usuarios</title>
+<style>
+  :root { --fondo: #f3f1ec; --panel: #fff; --texto: #1f1d1a; --suave: #77716a; --borde: #e2ddd4; --ok: #15803d; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: system-ui, sans-serif; background: var(--fondo); color: var(--texto); min-height: 100vh; }
+  header { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--texto); color: #fff; }
+  header h1 { font-size: 18px; flex: 1; }
+  header button { background: transparent; color: #fff; border: 1px solid #ffffff55; padding: 8px 12px; border-radius: 8px; font-size: 15px; }
+  main { max-width: 720px; margin: 0 auto; padding: 12px; }
+  section { background: var(--panel); border: 1px solid var(--borde); border-radius: 12px; padding: 12px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); margin: 4px 0 10px; display: flex; justify-content: space-between; align-items: center; }
+  .btn { padding: 10px 14px; border-radius: 8px; border: none; background: var(--texto); color: #fff; font-weight: 600; font-size: 15px; font-family: inherit; }
+  .btn.sec { background: #fff; color: var(--texto); border: 1px solid var(--borde); }
+  .btn.chico { padding: 6px 10px; font-size: 14px; }
+  .usuario { display: flex; align-items: center; gap: 10px; padding: 12px 4px; border-bottom: 1px solid var(--borde); }
+  .usuario .nombre { flex: 1; font-size: 16px; }
+  .usuario.inactivo .nombre { color: var(--suave); text-decoration: line-through; }
+  .rol { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--fondo); }
+  .rol.encargado { background: #fde7c7; }
+  .rol.cocina { background: #dbeafe; }
+  .ayuda { color: var(--suave); font-size: 14px; margin-top: 12px; line-height: 1.5; }
+  dialog { border: none; border-radius: 14px; padding: 20px; width: min(420px, 94vw); }
+  dialog { margin: auto; }
+  dialog a { color: var(--suave); }
+  dialog::backdrop { background: #0006; }
+  label { display: block; font-size: 13px; color: var(--suave); margin: 12px 0 4px; }
+  input, select { width: 100%; padding: 11px; font-size: 16px; border: 1px solid var(--borde); border-radius: 8px; background: #fff; font-family: inherit; }
+  .check { display: flex; gap: 8px; align-items: center; margin-top: 14px; font-size: 15px; color: var(--texto); }
+  .check input { width: auto; }
+  .pie { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Usuarios</h1>
+  <button onclick="location.href='/'">Volver al TPV</button>
+  <button onclick="TPV.salir()">Salir</button>
+</header>
+
+<main>
+  <section>
+    <h2>Personal <button class="btn chico" onclick="abrir()">+ Nuevo</button></h2>
+    <div id="lista"></div>
+    <p class="ayuda">
+      <b>Camarero</b>: mesas, enviar a cocina y cobrar. Puede quitar platos que aún no se han enviado.<br>
+      <b>Encargado</b>: todo lo anterior, más carta, ventas, usuarios y anular platos ya enviados.<br>
+      <b>Cocina</b>: solo la pantalla de cocina y barra.
+    </p>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <h3 id="titulo">Usuario</h3>
+  <form id="form" onsubmit="guardar(event)">
+    <label>Nombre</label>
+    <input name="nombre" required maxlength="30" autocomplete="off">
+    <label>Rol</label>
+    <select name="rol">
+      <option value="camarero">Camarero</option>
+      <option value="encargado">Encargado</option>
+      <option value="cocina">Cocina</option>
+    </select>
+    <label id="etiquetaPin">PIN (4 a 6 números)</label>
+    <input name="pin" inputmode="numeric" pattern="\d{4,6}" maxlength="6" autocomplete="off">
+    <label class="check" id="filaActivo"><input type="checkbox" name="activo"> Activo (puede entrar)</label>
+    <div class="pie">
+      <button type="button" class="btn sec" onclick="dlg.close()">Cancelar</button>
+      <button class="btn">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/comun.js"></script>
+<script>
+const { esc, api, aviso } = TPV;
+let usuarios = [], editando = null;
+
+async function cargar() {
+  usuarios = await api('GET', '/api/usuarios');
+  document.getElementById('lista').innerHTML = usuarios.map(u => `
+    <div class="usuario ${u.activo ? '' : 'inactivo'}">
+      <span class="nombre">${esc(u.nombre)}${u.id === TPV.usuario.id ? ' (tú)' : ''}</span>
+      <span class="rol ${u.rol}">${u.rol}</span>
+      <button class="btn sec chico" onclick="abrir(${u.id})">Editar</button>
+    </div>`).join('');
+}
+
+function abrir(id) {
+  editando = id ? usuarios.find(u => u.id === id) : null;
+  const f = document.getElementById('form');
+  document.getElementById('titulo').textContent = editando ? 'Editar usuario' : 'Nuevo usuario';
+  document.getElementById('etiquetaPin').textContent = editando ? 'Nuevo PIN (déjalo vacío para no cambiarlo)' : 'PIN (4 a 6 números)';
+  document.getElementById('filaActivo').hidden = !editando;
+  f.nombre.value = editando?.nombre ?? '';
+  f.rol.value = editando?.rol ?? 'camarero';
+  f.pin.value = '';
+  f.pin.required = !editando;
+  f.activo.checked = editando ? !!editando.activo : true;
+  dlg.showModal();
+}
+
+async function guardar(ev) {
+  ev.preventDefault();
+  const f = ev.target;
+  const cuerpo = { nombre: f.nombre.value, rol: f.rol.value, pin: f.pin.value };
+  try {
+    if (editando) await api('PUT', `/api/usuarios/${editando.id}`, { ...cuerpo, activo: f.activo.checked });
+    else await api('POST', '/api/usuarios', cuerpo);
+    dlg.close();
+    aviso('Guardado');
+    cargar();
+  } catch (e) { aviso(e.message, 'peligro'); }
+}
+
+TPV.iniciar({ roles: ['encargado'], alEntrar: cargar });
+</script>
+</body>
+</html>
